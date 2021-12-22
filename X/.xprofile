@@ -1,0 +1,33 @@
+#!/bin/bash
+[[ -f ~/.config/zsh/.zshenv ]] && source ~/.config/zsh/.zshenv
+
+have() { type "$1" > /dev/null 2>&1; }
+
+bg_color='#1E2029'
+bg_image=~/.dotfiles/xtheme/wallpaper.png
+
+# Set background color
+if have xsetroot; then
+    xsetroot -solid "$bg_color" -cursor_name 'left_ptr'
+fi
+
+# Set background image
+if have hsetroot; then
+    hsetroot -solid "$bg_color" -tile "$bg_image" &
+fi
+
+# Load X-specific profile
+[ -f ~/.config/Xresources ] && xrdb -merge ~/.config/Xresources &
+setxkbmap -layout br -option caps:ctrl_modifier &
+
+devmon 2>&1 > /dev/null &
+redshift -l -8.05389:-34.88111 &
+"$XDG_CONFIG_HOME"/polybar/run.sh &
+
+# Clean up leftovers, as much as we can
+[ -e ~/.Xauthtority ] && mv -f ~/.Xauthority "$XAUTHORITY"
+
+pushd "$HOME"
+rm -rf .compose-cache .nv .pki .dbus .fehbg
+[ -s .xsession-errors ] || rm -f .xsession-errors*
+popd
