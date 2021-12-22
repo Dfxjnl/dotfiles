@@ -23,6 +23,7 @@ setxkbmap -layout br -option caps:ctrl_modifier &
 devmon 2>&1 > /dev/null &
 redshift -l -8.05389:-34.88111 &
 "$XDG_CONFIG_HOME"/polybar/run.sh &
+emacs --daemon &
 
 # Clean up leftovers, as much as we can
 [ -e ~/.Xauthtority ] && mv -f ~/.Xauthority "$XAUTHORITY"

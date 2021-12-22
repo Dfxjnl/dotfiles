@@ -57,6 +57,14 @@ export TMUXIFIER_LAYOUT_PATH="$XDG_DATA_HOME/tmuxifier"
 
 export GNUPGHOME="$XDG_CONFIG_HOME/gnupg"
 
+export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/config"
+export NPM_CONFIG_CACHE="$XDG_CACHE_HOME/npm"
+export NPM_CONFIG_TMP="$XDG_RUNTIME_DIR/npm"
+export NPM_CONFIG_PREFIX="$XDG_CACHE_HOME/npm"
+export NODE_REPL_HISTORY="$XDG_CACHE_HOME/node/repl_history"
+
+export PATH="$XDG_BIN_HOME:$TMUXIFIER/bin:$XDG_CONFIG_HOME/emacs/bin:$NPM_CONFIG_PREFIX:/bin:$PATH"
+
 export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
 
 function _cache {
@@ -64,19 +72,19 @@ function _cache {
     local cache_dir="$XDG_CACHE_HOME/${SHELL##*/}"
     local cache="$cache_dir/$1"
     if [[ ! -f $cache || ! -s $cache ]]; then
-	echo "Caching $1"
-	mkdir -p $cache_dir
-	"$@" >$cache
-	chmod 600 $cache
+    echo "Caching $1"
+    mkdir -p $cache_dir
+    "$@" >$cache
+    chmod 600 $cache
     fi
     if [[ -o interactive ]]; then
-	source $cache || rm -f $cache
+    source $cache || rm -f $cache
     fi
 }
 
 function _source {
     for file in "$@"; do
-	[ -r $file ] && source $file
+    [ -r $file ] && source $file
     done
 }
 
