@@ -26,8 +26,6 @@ redshift -l -8.05389:-34.88111 &
 emacs --daemon &
 
 # Clean up leftovers, as much as we can
-[ -e ~/.Xauthtority ] && mv -f ~/.Xauthority "$XAUTHORITY"
-
 pushd "$HOME"
 rm -rf .compose-cache .nv .pki .dbus .fehbg
 [ -s .xsession-errors ] || rm -f .xsession-errors*

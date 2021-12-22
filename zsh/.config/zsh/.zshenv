@@ -9,6 +9,7 @@ test "$XDG_CONFIG_HOME" || export XDG_CONFIG_HOME="$HOME/.config"
 test "$XDG_DATA_HOME" || export XDG_DATA_HOME="$HOME/.local/share"
 test "$XDG_RUNTIME_DIR" || export XDG_RUNTIME_DIR="$XDG_CACHE_HOME"
 test "$XDG_BIN_HOME" || export XDG_BIN_HOME="$HOME/.local/bin"
+export XDG_DESKTOP_DIR="$HOME/"
 
 # Locale
 export NAME="Hugo Pungs"
@@ -63,9 +64,10 @@ export NPM_CONFIG_TMP="$XDG_RUNTIME_DIR/npm"
 export NPM_CONFIG_PREFIX="$XDG_CACHE_HOME/npm"
 export NODE_REPL_HISTORY="$XDG_CACHE_HOME/node/repl_history"
 
-export PATH="$XDG_BIN_HOME:$TMUXIFIER/bin:$XDG_CONFIG_HOME/emacs/bin:$NPM_CONFIG_PREFIX:/bin:$PATH"
+export PATH="$XDG_BIN_HOME:$TMUXIFIER/bin:$XDG_CONFIG_HOME/emacs/bin:$NPM_CONFIG_PREFIX/bin:$PATH"
 
 export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
+[ -e ~/.Xauthority ] && mv -f ~/.Xauthority "$XAUTHORITY"
 
 function _cache {
     (( $+commands[$1] )) || return 1

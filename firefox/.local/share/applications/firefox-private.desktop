@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Firefox (Private)
+Comment=Open a private Firefox window
+Exec=/usr/bin/firefox --private-window
+Icon=firefox
+Type=Application
+Categories=Network
