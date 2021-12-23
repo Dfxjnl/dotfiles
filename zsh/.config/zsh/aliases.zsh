@@ -3,24 +3,24 @@ alias ...='cd ../../'
 alias ....='cd ../../..'
 alias -- -='cd -'
 
-alias q=exit
 alias clr=clear
-alias rm='rm -iv'
 alias cp='cp -iv'
-alias mv='mv -iv'
-alias mkdir='mkdir -pv'
-alias wget='wget -c'
-alias path='echo -e ${PATH//:/\\n}'
-alias stow='stow -v'
-alias du='du -h'
 alias df='df -h'
+alias du='du -h'
+alias mkdir='mkdir -pv'
+alias mv='mv -iv'
+alias path='echo -e ${PATH//:/\\n}'
+alias q=exit
+alias rm='rm -iv'
+alias stow='stow -v'
 alias sudo='sudo '
+alias wget='wget -c'
 
 alias poweroff='sudo poweroff'
 alias reboot='sudo reboot'
 
-alias y='xclip -selection clipboard -in'
 alias p='xclip -selection clipboard -out'
+alias y='xclip -selection clipboard -in'
 
 if (( $+commands[exa] )); then
     alias ls="exa --group-directories-first --git"

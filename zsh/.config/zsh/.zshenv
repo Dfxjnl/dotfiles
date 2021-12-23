@@ -19,8 +19,9 @@ export TZ="America/Recife"
 # Preferred programs
 export BROWSER="firefox"
 export EDITOR="nvim"
-export PAGER="less"
-unset VISUAL
+export PAGER="less --quit-at-eof"
+export MANPAGER="$PAGER"
+export VISUAL="emacsclient -c"
 
 # Misc
 export LESS="e M q R F X z -3"

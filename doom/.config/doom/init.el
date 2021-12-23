@@ -189,3 +189,6 @@
        :config
        ;;literate
        (default +bindings +smartparens))
+
+;; must be set before the package loads
+(setq evil-respect-visual-line-mode t)
