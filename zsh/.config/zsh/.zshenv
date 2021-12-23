@@ -64,7 +64,19 @@ export NPM_CONFIG_TMP="$XDG_RUNTIME_DIR/npm"
 export NPM_CONFIG_PREFIX="$XDG_CACHE_HOME/npm"
 export NODE_REPL_HISTORY="$XDG_CACHE_HOME/node/repl_history"
 
-export PATH="$XDG_BIN_HOME:$TMUXIFIER/bin:$XDG_CONFIG_HOME/emacs/bin:$NPM_CONFIG_PREFIX/bin:$PATH"
+export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
+
+export IPYTHONDIR="$XDG_CONFIG_HOME/ipython"
+export PIP_CONFIG_FILE="$XDG_CONFIG_HOME/pip/pip.conf"
+export PIP_LOG_FILE="$XDG_DATA_HOME/pip/log"
+export PYLINTHOME="$XDG_DATA_HOME/pylint"
+export PYLINTRC="$XDG_CONFIG_HOME/pylint/pylintrc"
+export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/pythonrc"
+export PYTHON_EGG_CACHE="$XDG_CACHE_HOME/python-eggs"
+export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME/jupyter"
+
+export PATH="$XDG_BIN_HOME:$TMUXIFIER/bin:$XDG_CONFIG_HOME/emacs/bin:$NPM_CONFIG_PREFIX/bin:$CARGO_HOME/bin:$PATH"
 
 export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
 [ -e ~/.Xauthority ] && mv -f ~/.Xauthority "$XAUTHORITY"
@@ -74,19 +86,19 @@ function _cache {
     local cache_dir="$XDG_CACHE_HOME/${SHELL##*/}"
     local cache="$cache_dir/$1"
     if [[ ! -f $cache || ! -s $cache ]]; then
-    echo "Caching $1"
-    mkdir -p $cache_dir
-    "$@" >$cache
-    chmod 600 $cache
+        echo "Caching $1"
+        mkdir -p $cache_dir
+        "$@" >$cache
+        chmod 600 $cache
     fi
     if [[ -o interactive ]]; then
-    source $cache || rm -f $cache
+        source $cache || rm -f $cache
     fi
 }
 
 function _source {
     for file in "$@"; do
-    [ -r $file ] && source $file
+        [ -r $file ] && source $file
     done
 }
 

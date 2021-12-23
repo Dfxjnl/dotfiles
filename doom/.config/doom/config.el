@@ -29,7 +29,7 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
+(setq org-directory "~/projects/org/")
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -355,3 +355,17 @@
 
 ;; markdown
 (add-hook! (gfm-mode markdown-mode) #'visual-line-mode #'turn-off-auto-fill)
+
+;; flycheck
+(defvar-local my/flycheck-local-cache nil)
+
+(defun my/flycheck-checker-get (fn checker property)
+  (or (alist-get property (alist-get checker my/flycheck-local-cache))
+      (funcall fn checker property)))
+
+(advice-add 'flycheck-checker-get :around 'my/flycheck-checker-get)
+
+(add-hook 'lsp-managed-mode-hook
+          (lambda ()
+            (when (derived-mode-p 'sh-mode)
+              (setq my/flycheck-local-cache '((lsp . ((next-checkers . (sh-shellcheck)))))))))

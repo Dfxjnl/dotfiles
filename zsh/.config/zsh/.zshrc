@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 source $ZDOTDIR/config.zsh
 
-export PATH="$XDG_BIN_HOME:$TMUXIFIER/bin:$XDG_CONFIG_HOME/emacs/bin:$NPM_CONFIG_PREFIX/bin:$PATH"
+export PATH="$XDG_BIN_HOME:$TMUXIFIER/bin:$XDG_CONFIG_HOME/emacs/bin:$NPM_CONFIG_PREFIX/bin:$CARGO_HOME/bin:$PATH"
 
 # NOTE Zgen is no longer maintained; zgenom is a maintained fork
 if [ ! -d "$ZGEN_DIR" ]; then

@@ -17,7 +17,7 @@ if have hsetroot; then
 fi
 
 # Load X-specific profile
-[ -f ~/.config/Xresources ] && xrdb -merge ~/.config/Xresources &
+[ -f ~/.config/Xresources ] && xrdb -merge ~/.config/Xresources
 setxkbmap -layout br -option caps:ctrl_modifier &
 
 devmon 2>&1 > /dev/null &

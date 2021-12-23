@@ -35,8 +35,8 @@ if (( $+commands[fasd] )); then
     # Fuzzy completion with 'z' when called without args
     unalias z 2>/dev/null
     function z {
-	[ $# -gt 0 ] && _z "$*" && return
-	cd "$(_z -l 2>&1 | fzf --height 40% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
+        [ $# -gt 0 ] && _z "$*" && return
+        cd "$(_z -l 2>&1 | fzf --height 40% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
     }
 fi
 
@@ -46,7 +46,7 @@ autoload -U zmv
 e() { pgrep emacs && emacsclient -n "$@" || emacs -new "$@" }
 ediff() { emacs -nw --eval "(ediff-files \"$1\" \"$2\")"; }
 eman() { emacs -nw --eval "(switch-to-buffer (man \"$1\"))"; }
-ekill() { emacsclient --eval '(kill-emacs'; }
+ekill() { emacsclient --eval '(kill-emacs)'; }
 
 # Git
 g() { [[ $# = 0 ]] && git status --short . || git $*; }
@@ -80,38 +80,38 @@ alias gv='git rev-parse'
 
 if (( $+commands[fzf] )); then
     __git_log() {
-	# format str implies:
-	#  --abbrev-commit
-	#  --decorate
-	git log \
-	    --color=always \
-	    --graph \
-	    --all \
-	    --date=short \
-	    --format="%C(bold blue)%h%C(reset) %C(green)%ad%C(reset) | %C(white)%s %C(red)[%an] %C(bold yellow)%d"
+    # format str implies:
+    #  --abbrev-commit
+    #  --decorate
+        git log \
+            --color=always \
+            --graph \
+            --all \
+            --date=short \
+            --format="%C(bold blue)%h%C(reset) %C(green)%ad%C(reset) | %C(white)%s %C(red)[%an] %C(bold yellow)%d"
     }
 
     _fzf_complete_git() {
-	ARGS="$@"
+        ARGS="$@"
 
-	# these are commands I commonly call on commit hashes.
-	# cp->cherry-pick, co->checkout
+        # these are commands I commonly call on commit hashes.
+        # cp->cherry-pick, co->checkout
 
-	if [[ $ARGS == 'git cp'* || \
-		  $ARGS == 'git cherry-pick'* || \
-		  $ARGS == 'git co'* || \
-		  $ARGS == 'git checkout'* || \
-		  $ARGS == 'git reset'* || \
-		  $ARGS == 'git show'* || \
-		  $ARGS == 'git log'* ]]; then
-	    _fzf_complete "--reverse --multi" "$@" < <(__git_log)
-	else
-	    eval "zle ${fzf_default_completion:-expand-or-complete}"
-	fi
+        if [[ $ARGS == 'git cp'* || \
+            $ARGS == 'git cherry-pick'* || \
+            $ARGS == 'git co'* || \
+            $ARGS == 'git checkout'* || \
+            $ARGS == 'git reset'* || \
+            $ARGS == 'git show'* || \
+            $ARGS == 'git log'* ]]; then
+            _fzf_complete "--reverse --multi" "$@" < <(__git_log)
+        else
+            eval "zle ${fzf_default_completion:-expand-or-complete}"
+        fi
     }
 
     _fzf_complete_git_post() {
-	sed -e 's/^[^a-z0-9]*//' | awk '{print $1}'
+        sed -e 's/^[^a-z0-9]*//' | awk '{print $1}'
     }
 fi
 
@@ -119,25 +119,30 @@ fi
 alias ta='tmux attach'
 alias tl='tmux ls'
 
+# rust
+alias rs=rustc
+alias rsp=rustup
+alias ca=cargo
+
 if [[ -n $TMUX ]]; then # From inside tmux
     alias tf='tmux find-window'
     # Detach all other clients to this session
     alias mine='tmux detach -a'
     # Send command to other tmux window
     tt() {
-      tmux send-keys -t .+ C-u && \
-        tmux set-buffer "$*" && \
-        tmux paste-buffer -t .+ && \
-        tmux send-keys -t .+ Enter;
+        tmux send-keys -t .+ C-u &&
+        tmux set-buffer "$*" &&
+        tmux paste-buffer -t .+ &&
+        tmux send-keys -t .+ Enter
     }
     # Create new session (from inside one)
     tn() {
-      local name="${1:-`basename $PWD`}"
+      local name="${1:-$(basename $PWD)}"
       TMUX= tmux new-session -d -s "$name"
       tmux switch-client -t "$name"
       tmux display-message "Session #S created"
     }
-  else # From outside tmux
+else # From outside tmux
     # Start grouped session so I can be in two different windows in one session
-    tdup() { tmux new-session -t "${1:-`tmux display-message -p '#S'`}"; }
+    tdup() { tmux new-session -t "${1:-$(tmux display-message -p '#S')}"; }
 fi
