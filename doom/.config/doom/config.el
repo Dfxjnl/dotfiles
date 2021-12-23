@@ -369,3 +369,7 @@
           (lambda ()
             (when (derived-mode-p 'sh-mode)
               (setq my/flycheck-local-cache '((lsp . ((next-checkers . (sh-shellcheck)))))))))
+
+;; docs
+(use-package! devdocs
+  :after lsp)

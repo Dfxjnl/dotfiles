@@ -185,8 +185,8 @@ font:
 colors:
   # Default colors
   primary:
-    background: '#1E2029'
-    foreground: '#F8F8F2'
+    background: "#1E2029"
+    foreground: "#F8F8F2"
 
     # Bright and dim foreground colors
     #
@@ -195,7 +195,7 @@ colors:
     # `draw_bold_text_with_bright_colors` is `false`, the normal foreground
     # color will be used.
     #dim_foreground: '#828482'
-    #bright_foreground: '#eaeaea'
+    bright_foreground: "#ffffff"
 
   # Cursor colors
   #
@@ -204,8 +204,8 @@ colors:
   # Allowed values are CellForeground/CellBackground, which reference the
   # affected cell, or hexadecimal colors like #ff00ff.
   cursor:
-  #  text: CellBackground
-    cursor: '#BD93F9'
+    text: CellBackground
+    cursor: CellForeground
 
   # Vi mode cursor colors
   #
@@ -214,43 +214,43 @@ colors:
   # Allowed values are CellForeground/CellBackground, which reference the
   # affected cell, or hexadecimal colors like #ff00ff.
   vi_mode_cursor:
-  #  text: CellBackground
-    cursor: '#BD93F9'
+    text: CellBackground
+    cursor: CellForeground
 
   # Search colors
   #
   # Colors used for the search bar and match highlighting.
-  #search:
+  search:
     # Allowed values are CellForeground/CellBackground, which reference the
     # affected cell, or hexadecimal colors like #ff00ff.
-    #matches:
-    #  foreground: '#000000'
-    #  background: '#ffffff'
-    #focused_match:
-    #  foreground: '#ffffff'
-    #  background: '#000000'
+    matches:
+      foreground: "#44475a"
+      background: "#50fa7b"
+    focused_match:
+      foreground: "#44475a"
+      background: "#ffb86c"
 
-    #bar:
-    #  background: '#c5c8c6'
-    #  foreground: '#1d1f21'
+    bar:
+      background: "#1e2029"
+      foreground: "#f8f8f2"
 
   # Keyboard regex hints
-  #hints:
+  hints:
     # First character in the hint label
     #
     # Allowed values are CellForeground/CellBackground, which reference the
     # affected cell, or hexadecimal colors like #ff00ff.
-    #start:
-    #  foreground: '#1d1f21'
-    #  background: '#e9ff5e'
+    start:
+      foreground: "#1e2029"
+      background: "#f1fa8c"
 
     # All characters after the first one in the hint label
     #
     # Allowed values are CellForeground/CellBackground, which reference the
     # affected cell, or hexadecimal colors like #ff00ff.
-    #end:
-    #  foreground: '#e9ff5e'
-    #  background: '#1d1f21'
+    end:
+      foreground: "#f1fa8c"
+      background: "#1e2029"
 
   # Line indicator
   #
@@ -258,9 +258,9 @@ colors:
   # search and vi mode.
   #
   # By default, these will use the opposing primary color.
-  #line_indicator:
-  #  foreground: None
-  #  background: None
+  line_indicator:
+    foreground: None
+    background: None
 
   # Selection colors
   #
@@ -268,31 +268,31 @@ colors:
   #
   # Allowed values are CellForeground/CellBackground, which reference the
   # affected cell, or hexadecimal colors like #ff00ff.
-  #selection:
-  #  text: CellBackground
-  #  background: CellForeground
+  selection:
+    text: CellBackground
+    background: "#44475a"
 
   # Normal colors
   normal:
-    black:   '#1E2029'
-    red:     '#FFB86C'
-    green:   '#50FA7B'
-    yellow:  '#F0C674'
-    blue:    '#61BFFF'
-    magenta: '#BD93F9'
-    cyan:    '#8BE9FD'
-    white:   '#F8F8F2'
+    black: "#1E2029"
+    red: "#FFB86C"
+    green: "#50FA7B"
+    yellow: "#F0C674"
+    blue: "#61BFFF"
+    magenta: "#BD93F9"
+    cyan: "#8BE9FD"
+    white: "#F8F8F2"
 
   # Bright colors
   bright:
-    black:   '#5B6268'
-    red:     '#DE935F'
-    green:   '#0189CC'
-    yellow:  '#F9A03F'
-    blue:    '#8BE9FD'
-    magenta: '#FF79C6'
-    cyan:    '#0189CC'
-    white:   '#E2E2DC'
+    black: "#5B6268"
+    red: "#DE935F"
+    green: "#0189CC"
+    yellow: "#F9A03F"
+    blue: "#8BE9FD"
+    magenta: "#FF79C6"
+    cyan: "#0189CC"
+    white: "#E2E2DC"
 
   # Dim colors
   #
