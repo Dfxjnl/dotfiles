@@ -22,11 +22,6 @@
 ;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
 
-;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set `doom-theme' or manually load a theme with the
-;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-dracula)
-
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/projects/org/")
@@ -53,31 +48,33 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-;;; Better defaults
-(setq-default window-combination-resize t ; Take new window space from all other windows (not just current)
-              x-stretch-cursor t)         ; Stretch cursor to the glyph width
+(setq undo-limit (* 64 1024 1024)
+      evil-want-fine-undo t
+      password-cache-expiry nil
+      scroll-margin 2)
 
-(setq undo-limit 80000000                 ; Raise undo-limit to 80Mb
-      evil-want-fine-undo t               ; Be more granular about undo changes
-      truncate-string-ellipsis "…"        ; Unicode ellipsis
-      password-cache-expiry nil           ; I can trust my computers
-      scroll-margin 2)                    ; Maintain a little margin
+(global-subword-mode 1)
 
-(global-subword-mode 1)                   ; Iterate through CamelCase words
+(add-to-list 'default-frame-alist '(height . 24))
+(add-to-list 'default-frame-alist '(width . 80))
 
 (setq evil-split-window-below t
       evil-vsplit-window-right t)
 
-;; Font
 (setq doom-font (font-spec :family "JetBrains Mono" :size 12)
       doom-big-font (font-spec :family "JetBrains Mono" :size 16)
       doom-variable-pitch-font (font-spec :family "Overpass" :size 12)
+      doom-unicode-font (font-spec :family "JuliaMono")
       doom-serif-font (font-spec :family "IBM Plex Mono" :weight 'light))
 
-;; Splash screen
+(setq doom-theme 'doom-dracula)
+(remove-hook 'window-setup-hook #'doom-init-theme-h)
+(add-hook 'after-init-hook #'doom-init-theme-h 'append)
+(delq! t custom-theme-load-path)
+
 (defvar fancy-splash-image-template
-  (expand-file-name "misc/splash-images/emacs-e-template.svg" doom-private-dir)
-  "Default template svg used for the splash image.")
+  (expand-file-name "splash-images/emacs-e-template.svg" doom-private-dir)
+  "Default template svg used for the splash image, with substitutions from ")
 
 (defvar fancy-splash-sizes
   `((:height 300 :min-height 50 :padding (0 . 2))
@@ -85,20 +82,19 @@
     (:height 200 :min-height 35 :padding (3 . 3))
     (:height 150 :min-height 28 :padding (3 . 3))
     (:height 100 :min-height 20 :padding (2 . 2))
-    (:height 75 :min-height 15 :padding (2 . 1))
-    (:height 50 :min-height 10 :padding (1 . 0))
-    (:height 1 :min-height 0 :padding (0 . 0)))
-  "List of plists with the following properties
-:height the height of the image
-:min-height minimum `frame-height' for image
-:padding `+doom-dashboard-banner-padding' (top . bottom) to apply
-:template non-default template file
-:file file to use instead of template")
+    (:height 75  :min-height 15 :padding (2 . 1))
+    (:height 50  :min-height 10 :padding (1 . 0))
+    (:height 1   :min-height 0  :padding (0 . 0)))
+  "list of plists with the following properties
+  :height the height of the image
+  :min-height minimum `frame-height' for image
+  :padding `+doom-dashboard-banner-padding' (top . bottom) to apply
+  :template non-default template file
+  :file file to use instead of template")
 
 (defvar fancy-splash-template-colours
   '(("$colour1" . keywords) ("$colour2" . type) ("$colour3" . base5) ("$colour4" . base8))
   "list of colour-replacement alists of the form (\"$placeholder\" . 'theme-colour) which applied the template")
-
 
 (unless (file-exists-p (expand-file-name "theme-splashes" doom-cache-dir))
   (make-directory (expand-file-name "theme-splashes" doom-cache-dir) t))
@@ -169,7 +165,7 @@
 (add-hook 'doom-load-theme-hook #'set-appropriate-splash)
 
 (defvar splash-phrase-source-folder
-  (expand-file-name "misc/splash-phrases" doom-private-dir)
+  (expand-file-name "splash-phrases" doom-private-dir)
   "A folder of text files with a fun phrase on each line.")
 
 (defvar splash-phrase-sources
@@ -282,7 +278,6 @@
 (unless (display-graphic-p) ; for some reason this messes up the graphical splash screen atm
   (setq +doom-dashboard-ascii-banner-fn #'doom-dashboard-draw-ascii-emacs-banner-fn))
 
-;; which-key
 (setq which-key-idle-delay 0.5)
 
 (setq which-key-allow-multiple-replacements t)
@@ -292,50 +287,91 @@
    '(("" . "\\`+?evil[-:]?\\(?:a-\\)?\\(.*\\)") . (nil . "◂\\1"))
    '(("\\`g s" . "\\`evilem--?motion-\\(.*\\)") . (nil . "◃\\1"))))
 
-;; evil
 (after! evil
-  (setq evil-ex-substitute-global t     ; I like my s/../.. to by global by default
-        evil-move-cursor-back nil       ; Don't move the block cursor when toggling insert mode
-        evil-kill-on-visual-paste nil)) ; Don't put overwritten text in the kill ring
+  (setq evil-ex-substitute-global t
+        evil-move-cursor-back nil
+        evil-kill-on-visual-paste nil))
 
-;; company
 (after! company
-  (add-hook 'evil-normal-state-entry-hook #'company-abort)) ;; make aborting less annoying.
+  (setq company-idle-delay 0.5))
 
 (setq-default history-length 1000)
 
-;; projectile
+(set-company-backend!
+  '(text-mode markdown-mode gfm-mode)
+  '(:separate company-ispell company-files company-yasnippet))
+
 (setq projectile-ignored-projects '("~/" "/tmp" "~/.config/emacs/.local/straight/repos/"))
 (defun projectile-ignored-project-function (filepath)
   "Return t if FILEPATH is within any of `projectile-ignored-projects'"
   (or (mapcar (lambda (p) (s-starts-with-p p filepath)) projectile-ignored-projects)))
 
-;; yasnippet
+(setq ispell-dictionary "en-custom")
+
 (setq yas-triggers-in-field t)
 
-;; info-colors
-(use-package! info-colors
-  :commands (info-colors-fontify-node))
+(use-package! string-inflection
+  :commands (string-inflection-all-cycle
+             string-inflection-toggle
+             string-inflection-camelcase
+             string-inflection-lower-camelcase
+             string-inflection-kebab-case
+             string-inflection-underscore
+             string-inflection-capital-underscore
+             string-inflection-upcase)
+  :init
+  (map! :leader :prefix ("c~" . "naming convention")
+        :desc "cycle" "~" #'string-inflection-all-cycle
+        :desc "toggle" "t" #'string-inflection-toggle
+        :desc "CamelCase" "c" #'string-inflection-camelcase
+        :desc "downCase" "d" #'string-inflection-lower-camelcase
+        :desc "kebab-case" "k" #'string-inflection-kebab-case
+        :desc "under_score" "_" #'string-inflection-underscore
+        :desc "Upper_Score" "u" #'string-inflection-capital-underscore
+        :desc "UP_CASE" "U" #'string-inflection-upcase)
+  (after! evil
+    (evil-define-operator evil-operator-string-inflection (beg end _type)
+      "Define a new evil operator that cycles symbol casing."
+      :move-point nil
+      (interactive "<R>")
+      (string-inflection-all-cycle)
+      (setq evil-repeat-info '([?g ?~])))
+    (define-key evil-normal-state-map (kbd "g~") 'evil-operator-string-inflection)))
 
-;; emojify
-(setq emojify-emoji-set "twemoji-v2")
+(after! marginalia
+  (setq marginalia-censor-variables nil)
 
-(defvar emojify-disabled-emojis
-  '(;; Org
-    "◼" "☑" "☸" "⚙" "⏩" "⏪" "⬆" "⬇" "❓"
-    ;; Terminal powerline
-    "✔"
-    ;; Box drawing
-    "▶" "◀")
-  "Characters that should never be affected by `emojify-mode'.")
+  (defadvice! +marginalia--anotate-local-file-colorful (cand)
+    "Just a more colourful version of `marginalia--anotate-local-file'."
+    :override #'marginalia--annotate-local-file
+    (when-let (attrs (file-attributes (substitute-in-file-name
+                                       (marginalia--full-candidate cand))
+                                      'integer))
+      (marginalia--fields
+       ((marginalia--file-owner attrs)
+        :width 12 :face 'marginalia-file-owner)
+       ((marginalia--file-modes attrs))
+       ((+marginalia-file-size-colorful (file-attribute-size attrs))
+        :width 7)
+       ((+marginalia--time-colorful (file-attribute-modification-time attrs))
+        :width 12))))
 
-(defadvice! emojify-delete-from-data ()
-  "Ensure `emojify-disabled-emojis' don't appear in `emojify-emojis'."
-  :after #'emojify-set-emoji-data
-  (dolist (emoji emojify-disabled-emojis)
-    (remhash emoji emojify-emojis)))
+  (defun +marginalia--time-colorful (time)
+    (let* ((seconds (float-time (time-subtract (current-time) time)))
+           (color (doom-blend
+                   (face-attribute 'marginalia-date :foreground nil t)
+                   (face-attribute 'marginalia-documentation :foreground nil t)
+                   (/ 1.0 (log (+ 3 (/ (+ 1 seconds) 345600.0)))))))
+      ;; 1 - log(3 + 1/(days + 1)) % grey
+      (propertize (marginalia--time time) 'face (list :foreground color))))
 
-;; page-break-lines
+  (defun +marginalia-file-size-colorful (size)
+    (let* ((size-index (/ (log10 (+ 1 size)) 7.0))
+           (color (if (< size-index 10000000) ; 10m
+                      (doom-blend 'orange 'green size-index)
+                    (doom-blend 'red 'orange (- size-index 1)))))
+      (propertize (file-size-human-readable size) 'face (list :foreground color)))))
+
 (use-package! page-break-lines
   :commands page-break-lines-mode
   :init
@@ -345,50 +381,3 @@
   (map! :prefix "g"
         :desc "Prev page break" :nv "[" #'backward-page
         :desc "Next page break" :nv "]" #'forward-page))
-
-;;; Language customizations
-(define-generic-mode sxhkd-mode
-  '(?#)
-  '("alt" "Escape" "super" "bspc" "ctrl" "space" "shift") nil
-  '("sxhkdrc") nil
-  "Simple mode for sxhkdrc files.")
-
-;; markdown
-(add-hook! (gfm-mode markdown-mode) #'visual-line-mode #'turn-off-auto-fill)
-
-;; flycheck
-(defvar-local my/flycheck-local-cache nil)
-
-(defun my/flycheck-checker-get (fn checker property)
-  (or (alist-get property (alist-get checker my/flycheck-local-cache))
-      (funcall fn checker property)))
-
-(advice-add 'flycheck-checker-get :around 'my/flycheck-checker-get)
-
-(add-hook 'lsp-managed-mode-hook
-          (lambda ()
-            (when (derived-mode-p 'sh-mode)
-              (setq my/flycheck-local-cache '((lsp . ((next-checkers . (sh-shellcheck)))))))))
-
-;; docs
-(use-package! devdocs
-  :after lsp)
-
-;; tree-sitter
-(use-package! tree-sitter
-  :when (bound-and-true-p module-file-suffix)
-  :hook (prog-mode . tree-sitter-mode)
-  :hook (tree-sitter-after-on . tree-sitter-hl-mode)
-  :config
-  (require 'tree-sitter-langs)
-  (defadvice! doom-tree-sitter-fail-gracefully-a (orig-fn &rest args)
-    "Don't break with errors when current major mode lacks tree-sitter support."
-    :around #'tree-sitter-mode
-    (condition-case e
-        (apply orig-fn args)
-      (error
-       (unless (string-match-p (concat "^Cannot find shared library\\|"
-                                       "^No language registered\\|"
-                                       "cannot open shared object file")
-                               (error-message-string e))
-         (signal (car e) (cadr e)))))))

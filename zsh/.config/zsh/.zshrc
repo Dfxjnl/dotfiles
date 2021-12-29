@@ -54,3 +54,5 @@ if [[ $TERM != dumb ]]; then
     autopair-init
 fi
 
+
+alias luamake=/home/hugo/git/sumneko_lua/3rd/luamake/luamake

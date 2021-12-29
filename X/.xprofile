@@ -22,11 +22,11 @@ setxkbmap -layout br -option caps:ctrl_modifier &
 
 devmon 2>&1 > /dev/null &
 redshift -l -8.05389:-34.88111 &
-emacs --daemon &
+emacs --daemon && emacsclient -c --eval "(delete-frame)" &
 unclutter --fork &
 
 # Clean up leftovers, as much as we can
-pushd "$HOME"
+pushd "$HOME" || exit
 rm -rf .compose-cache .nv .pki .dbus .fehbg
 [ -s .xsession-errors ] || rm -f .xsession-errors*
-popd
+popd || exit

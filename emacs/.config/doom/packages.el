@@ -48,11 +48,9 @@
 ;(unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
-(unpin! lsp-mode lsp-ui)
-(package! info-colors :pin "47ee73cc19b1049eef32c9f3e264ea7ef2aaf8a5")
-(package! page-break-lines :recipe (:host github :repo "purcell/page-break-lines"))
 
-(package! tree-sitter
-  :ignore (null (bound-and-true-p module-file-suffix)))
-(package! tree-sitter-langs
-  :ignore (null (bound-and-true-p module-file-suffix)))
+(package! string-inflection
+  :pin "fd7926ac17293e9124b31f706a4e8f38f6a9b855")
+
+(package! page-break-lines
+  :recipe (:host github :repo "purcell/page-break-lines"))
