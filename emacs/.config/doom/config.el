@@ -381,3 +381,32 @@
   (map! :prefix "g"
         :desc "Prev page break" :nv "[" #'backward-page
         :desc "Next page break" :nv "]" #'forward-page))
+
+(define-generic-mode sxhkd-mode
+  '(?#)
+  '("alt" "Escape" "super" "bspc" "ctrl" "space" "shift") nil
+  '("sxhkdrc") nil
+  "Simple mode for sxhkdrc files.")
+
+(setq lsp-clients-clangd-args '("--all-scopes-completion"
+                                "--background-index"
+                                "--clang-tidy"
+                                "--completion-style=detailed"
+                                "--header-insertion=iwyu"
+                                "--header-insertion-decorators"
+                                "--inlay-hints"
+                                "-j=13"))
+(after! lsp-clangd (set-lsp-priority! 'clangd 2))
+
+(defvar-local my/flycheck-local-cache nil)
+
+(defun my/flycheck-checker-get (fn checker property)
+  (or (alist-get property (alist-get checker my/flycheck-local-cache))
+      (funcall fn checker property)))
+
+(advice-add 'flycheck-checker-get :around 'my/flycheck-checker-get)
+
+(add-hook 'lsp-managed-mode-hook
+          (lambda ()
+            (when (derived-mode-p 'c++-mode)
+              (setq my/flycheck-local-cache '((lsp . ((next-checkers . (c/c++-cppcheck)))))))))

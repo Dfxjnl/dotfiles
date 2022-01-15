@@ -19,16 +19,12 @@ export TZ="America/Recife"
 # Preferred programs
 export BROWSER="firefox"
 export EDITOR="nvim"
-export PAGER="less --quit-at-eof"
-export MANPAGER="$PAGER"
 export VISUAL="emacsclient -c"
 
 # Misc
-export LESS="e M q R F X z -3"
 export MAKEFLAGS="-j $(nproc)"
 export NSS_DEFAULT_DB_TYPE="sql"
 export SUDO_PROMPT="sudo password for %p@[30;43m%h[m: "
-export S_COLORS="auto" # sar/sysstat/iostat
 
 # zsh
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
