@@ -409,4 +409,4 @@
 (add-hook 'lsp-managed-mode-hook
           (lambda ()
             (when (derived-mode-p 'c++-mode)
-              (setq my/flycheck-local-cache '((lsp . ((next-checkers . (c/c++-cppcheck)))))))))
+              (setq my/flycheck-local-cache '((lsp . ((next-checkers . (c/c++-gcc)))))))))
