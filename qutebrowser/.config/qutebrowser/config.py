@@ -344,7 +344,6 @@ config.bind('<Ctrl-F>', 'rl-forward-word', mode='prompt')
 ## Per-domain settings
 c.content.user_stylesheets = glob.glob(os.path.expanduser('~/.local/share/qutebrowser/userstyles.css'))
 
-
 ## Load theme
 for path in glob.glob(os.path.expanduser('~/.config/qutebrowser/extra/*.py')):
     config.source(path)
