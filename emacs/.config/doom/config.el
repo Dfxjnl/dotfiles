@@ -306,8 +306,6 @@
   "Return t if FILEPATH is within any of `projectile-ignored-projects'"
   (or (mapcar (lambda (p) (s-starts-with-p p filepath)) projectile-ignored-projects)))
 
-(setq ispell-dictionary "en-custom")
-
 (setq yas-triggers-in-field t)
 
 (use-package! string-inflection
@@ -396,7 +394,7 @@
                                 "--header-insertion-decorators"
                                 "--inlay-hints"
                                 "-j=13"))
-(after! lsp-clangd (set-lsp-priority! 'clangd 2))
+(after! lsp-clangd (set-lsp-priority! 'clangd 1))
 
 (defvar-local my/flycheck-local-cache nil)
 
@@ -409,4 +407,10 @@
 (add-hook 'lsp-managed-mode-hook
           (lambda ()
             (when (derived-mode-p 'c++-mode)
-              (setq my/flycheck-local-cache '((lsp . ((next-checkers . (c/c++-gcc)))))))))
+              (setq my/flycheck-local-cache '((lsp . ((next-checkers . (c/c++-cppcheck)))))))))
+
+(use-package! highlight-escape-sequences
+  :hook (prog-mode . hes-mode))
+
+(setq flycheck-cppcheck-checks
+      '("warning" "style" "performance" "portability" "information" "missingInclude"))

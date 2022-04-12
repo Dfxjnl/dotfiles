@@ -54,3 +54,5 @@
 
 (package! page-break-lines
   :recipe (:host github :repo "purcell/page-break-lines"))
+
+(package! highlight-escape-sequences)

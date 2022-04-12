@@ -20,6 +20,7 @@ export TZ="America/Recife"
 export BROWSER="firefox"
 export EDITOR="nvim"
 export VISUAL="emacsclient -c"
+export SUDO_EDITOR="nvim"
 
 # Misc
 export MAKEFLAGS="-j $(nproc)"

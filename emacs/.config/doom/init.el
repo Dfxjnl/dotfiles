@@ -23,7 +23,10 @@
        (company +childframe) ; the ultimate code completion backend
        ;;helm                ; the *other* search engine for love and life
        ;;ido                 ; the other *other* search engine...
-       ;;ivy                 ; a search engine for love and life
+       (ivy                  ; a search engine for love and life
+        +prescient
+        +childframe
+        +icons)
        (vertico +icons)      ; the search engine of the future
 
        :ui
@@ -34,7 +37,7 @@
        ;;(emoji +unicode)    ; 🙂
        hl-todo               ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        ;;hydra
-       ;;indent-guides       ; highlighted indent columns
+       indent-guides         ; highlighted indent columns
        (ligatures +extra)    ; ligatures and symbols to make your code pretty again
        ;;minimap             ; show a map of the code on the side
        modeline              ; snazzy, Atom-inspired modeline, plus API
@@ -61,12 +64,12 @@
        format                ; automated prettiness
        ;;god                 ; run Emacs commands without modifier keys
        ;;lispy               ; vim for lisp, for people who don't like vim
-       ;;multiple-cursors    ; editing in many places at once
+       multiple-cursors      ; editing in many places at once
        ;;objed               ; text object editing for the innocent
        ;;parinfer            ; turn lisp into python, sort of
        ;;rotate-text         ; cycle region at point between text candidates
        snippets              ; my elves. They type so I don't have to
-       ;;word-wrap           ; soft wrapping with language-aware indent
+       word-wrap             ; soft wrapping with language-aware indent
 
        :emacs
        (dired +icons)        ; making dired pretty [functional]
@@ -79,17 +82,17 @@
        ;;eshell              ; the elisp shell that works everywhere
        ;;shell               ; simple shell REPL for Emacs
        ;;term                ; basic terminal emulator for Emacs
-       ;;vterm               ; the best terminal emulation in Emacs
+       vterm                 ; the best terminal emulation in Emacs
 
        :checkers
-       syntax                ; tasing you for every semicolon you forget
-       spell                 ; tasing you for misspelling mispelling
+       (syntax +childframe)  ; tasing you for every semicolon you forget
+       (spell +everywhere)   ; tasing you for misspelling mispelling
        grammar               ; tasing grammar mistake every you make
 
        :tools
        ;;ansible
        ;;biblio              ; Writes a PhD for you (citation needed)
-       (debugger +lsp)       ; FIXME stepping through code, to help you add bugs
+       debugger              ; FIXME stepping through code, to help you add bugs
        ;;direnv
        ;;docker
        editorconfig          ; let someone else argue about tabs vs spaces
@@ -98,8 +101,9 @@
        ;;gist                ; interacting with github gists
        (lookup               ; navigate your code and its documentation
         +dictionary          ; dictionary/thesaurus is nice
+        +offline             ; Install and prefer offline dictionary/thesaurus
         +docsets)            ; ...or in Dash docsets locally
-       lsp                   ; M-x vscode
+       (lsp +peek)           ; M-x vscode
        magit                 ; a git porcelain for Emacs
        make                  ; run make tasks from Emacs
        pass                  ; password manager for nerds
@@ -124,7 +128,7 @@
        ;;coq                 ; proofs-as-programs
        ;;crystal             ; ruby at the speed of c
        ;;csharp              ; unity, .NET, and mono shenanigans
-       ;;data                ; config/data formats
+       data                  ; config/data formats
        ;;(dart +flutter)     ; paint ui and not much else
        ;;dhall
        ;;elixir              ; erlang done right
@@ -160,7 +164,10 @@
        ;;php                 ; perl's insecure younger brother
        ;;plantuml            ; diagrams for confusing people more
        ;;purescript          ; javascript, but functional
-       (python +lsp)         ; beautiful is better than ugly
+       (python               ; beautiful is better than ugly
+        +lsp
+        +pyright
+        +cython)
        ;;qt                  ; the 'cutest' gui framework ever
        ;;racket              ; a DSL for DSLs
        ;;raku                ; the artist formerly known as perl6
