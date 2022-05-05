@@ -24,8 +24,9 @@
        ;;helm                ; the *other* search engine for love and life
        ;;ido                 ; the other *other* search engine...
        (ivy                  ; a search engine for love and life
+        -fuzzy
         +prescient
-        +childframe
+        -childframe
         +icons)
        (vertico +icons)      ; the search engine of the future
 
@@ -45,7 +46,6 @@
        ;;neotree             ; a project drawer, like NERDTree for vim
        ophints               ; highlight the region an operation acts on
        (popup                ; tame sudden yet inevitable temporary windows
-        +all                 ; catch all popups that start with an asterisk
         +defaults)           ; default popup rules
        ;;tabs                ; a tab bar for Emacs
        ;;treemacs            ; a project drawer, like neotree but cooler
@@ -60,7 +60,7 @@
        :editor
        (evil +everywhere)    ; come to the dark side, we have cookies
        file-templates        ; auto-snippets for empty files
-       fold                  ; (nigh) universal code folding
+       ;;fold                ; (nigh) universal code folding
        format                ; automated prettiness
        ;;god                 ; run Emacs commands without modifier keys
        ;;lispy               ; vim for lisp, for people who don't like vim
@@ -74,7 +74,7 @@
        :emacs
        (dired +icons)        ; making dired pretty [functional]
        electric              ; smarter, keyword-based electric-indent
-       (ibuffer +icons)      ; interactive buffer management
+       ;;(ibuffer +icons)    ; interactive buffer management
        undo                  ; persistent, smarter undo for your inevitable mistakes
        vc                    ; version-control and Emacs, sitting in a tree
 
@@ -86,7 +86,7 @@
 
        :checkers
        (syntax +childframe)  ; tasing you for every semicolon you forget
-       (spell +everywhere)   ; tasing you for misspelling mispelling
+       spell                 ; tasing you for misspelling mispelling
        grammar               ; tasing grammar mistake every you make
 
        :tools
@@ -99,15 +99,12 @@
        ;;ein                 ; tame Jupyter notebooks with emacs
        (eval +overlay)       ; run code, run (also, repls)
        ;;gist                ; interacting with github gists
-       (lookup               ; navigate your code and its documentation
-        +dictionary          ; dictionary/thesaurus is nice
-        +offline             ; Install and prefer offline dictionary/thesaurus
-        +docsets)            ; ...or in Dash docsets locally
+       (lookup)              ; navigate your code and its documentation
        (lsp +peek)           ; M-x vscode
        magit                 ; a git porcelain for Emacs
-       make                  ; run make tasks from Emacs
+       ;;make                ; run make tasks from Emacs
        pass                  ; password manager for nerds
-       pdf                   ; pdf enhancements
+       ;;pdf                 ; pdf enhancements
        ;;prodigy             ; FIXME managing external services & code builders
        ;;rgb                 ; creating color strings
        ;;taskrunner          ; taskrunner for all your projects
@@ -117,7 +114,7 @@
 
        :os
        (:if IS-MAC macos)    ; improve compatibility with macOS
-       tty                   ; improve the terminal Emacs experience
+       ;;tty                 ; improve the terminal Emacs experience
 
        :lang
        ;;agda                ; types of types of types of types...
@@ -174,7 +171,7 @@
        ;;rest                ; Emacs as a REST client
        ;;rst                 ; ReST in peace
        ;;(ruby +rails)       ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
-       ;;(rust +lsp)         ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
+       (rust +lsp)           ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        ;;scala               ; java, but good
        ;;(scheme +guile)     ; a fully conniving family of lisps
        (sh +lsp)             ; she sells {ba,z,fi}sh shells on the C xor

@@ -30,6 +30,7 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
 
+(setq confirm-kill-emacs nil)
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
@@ -392,9 +393,8 @@
                                 "--completion-style=detailed"
                                 "--header-insertion=iwyu"
                                 "--header-insertion-decorators"
-                                "--inlay-hints"
                                 "-j=13"))
-(after! lsp-clangd (set-lsp-priority! 'clangd 1))
+(after! lsp-clangd (set-lsp-priority! 'clangd 2))
 
 (defvar-local my/flycheck-local-cache nil)
 
@@ -414,3 +414,9 @@
 
 (setq flycheck-cppcheck-checks
       '("warning" "style" "performance" "portability" "information" "missingInclude"))
+
+(setq flycheck-checker-error-threshold nil)
+
+(add-hook! 'org-mode-hook #'mixed-pitch-mode)
+(add-hook! 'org-mode-hook #'solaire-mode)
+(setq mixed-pitch-variable-pitch-cursor nil)
