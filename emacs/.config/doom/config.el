@@ -417,6 +417,4 @@
 
 (setq flycheck-checker-error-threshold nil)
 
-(add-hook! 'org-mode-hook #'mixed-pitch-mode)
 (add-hook! 'org-mode-hook #'solaire-mode)
-(setq mixed-pitch-variable-pitch-cursor nil)
