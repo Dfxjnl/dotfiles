@@ -63,10 +63,7 @@
       evil-vsplit-window-right t)
 
 (setq doom-font (font-spec :family "JetBrains Mono" :size 12)
-      doom-big-font (font-spec :family "JetBrains Mono" :size 16)
-      doom-variable-pitch-font (font-spec :family "Overpass" :size 12)
-      doom-unicode-font (font-spec :family "JuliaMono")
-      doom-serif-font (font-spec :family "IBM Plex Mono" :weight 'light))
+      doom-big-font (font-spec :family "JetBrains Mono" :size 16))
 
 (setq doom-theme 'doom-dracula)
 (remove-hook 'window-setup-hook #'doom-init-theme-h)
@@ -393,7 +390,8 @@
                                 "--completion-style=detailed"
                                 "--header-insertion=iwyu"
                                 "--header-insertion-decorators"
-                                "-j=13"))
+                                "-j=13"
+                                "--pch-storage=disk"))
 (after! lsp-clangd (set-lsp-priority! 'clangd 2))
 
 (defvar-local my/flycheck-local-cache nil)
@@ -413,7 +411,7 @@
   :hook (prog-mode . hes-mode))
 
 (setq flycheck-cppcheck-checks
-      '("warning" "style" "performance" "portability" "information" "missingInclude"))
+      '("style" "performance" "warning" "portability"))
 
 (setq flycheck-checker-error-threshold nil)
 

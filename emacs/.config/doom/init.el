@@ -127,7 +127,7 @@
        ;;coq                 ; proofs-as-programs
        ;;crystal             ; ruby at the speed of c
        ;;csharp              ; unity, .NET, and mono shenanigans
-       data                  ; config/data formats
+       ;; data               ; config/data formats
        ;;(dart +flutter)     ; paint ui and not much else
        ;;dhall
        ;;elixir              ; erlang done right
@@ -174,7 +174,7 @@
        ;;rest                ; Emacs as a REST client
        ;;rst                 ; ReST in peace
        ;;(ruby +rails)       ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
-       (rust +lsp)           ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
+       ;;(rust +lsp)         ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        ;;scala               ; java, but good
        ;;(scheme +guile)     ; a fully conniving family of lisps
        (sh +lsp +tree-sitter); she sells {ba,z,fi}sh shells on the C xor
@@ -182,7 +182,7 @@
        ;;solidity            ; do you need a blockchain? No.
        ;;swift               ; who asked for emoji variables?
        ;;terra               ; Earth and Moon in alignment for performance.
-       web                   ; the tubes
+       (web +lsp +tree-sitter) ; the tubes
        (yaml +lsp +tree-sitter)           ; JSON, but readable
        ;;zig                 ; C, but simpler
 
