@@ -10,22 +10,30 @@ end
 
 -- stylua: ignore start
 require('packer').startup(function(use)
-  use 'wbthomason/packer.nvim'                                              -- Package manager
-  use 'tpope/vim-fugitive'                                                  -- Git commands in neovim
-  use 'tpope/vim-rhubarb'                                                   -- Fugitive companion to interact with github
+  use 'wbthomason/packer.nvim' -- Package manager
   use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } } -- Add git related info in the signs columns and popups
-  use 'numToStr/Comment.nvim'                                               -- "gc" to comment visual regions/lines
-  use 'nvim-treesitter/nvim-treesitter'                                     -- Highlight, edit, and navigate code
-  use 'nvim-treesitter/nvim-treesitter-textobjects'                         -- Additional textobjects for treesitter
-  use 'neovim/nvim-lspconfig'                                               -- Collection of configurations for built-in LSP client
-  use 'williamboman/mason.nvim'                                             -- Manage external editor tooling i.e LSP servers
-  use 'williamboman/mason-lspconfig.nvim'                                   -- Automatically install language servers to stdpath
-  use { 'hrsh7th/nvim-cmp', requires = { 'hrsh7th/cmp-nvim-lsp' } }         -- Autocompletion
-  use { 'L3MON4D3/LuaSnip', requires = { 'saadparwaiz1/cmp_luasnip' } }     -- Snippet engine and snippet expansion
-  use 'Mofiqul/dracula.nvim'                                                -- Dracula theme
-  use 'nvim-lualine/lualine.nvim'                                           -- Fancier statusline
-  use 'lukas-reineke/indent-blankline.nvim'                                 -- Add indentation guides even on blank lines
-  use 'tpope/vim-sleuth'                                                    -- Detect tabstop and shiftwidth automatically
+  use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
+  use 'nvim-treesitter/nvim-treesitter' -- Highlight, edit, and navigate code
+  use 'nvim-treesitter/nvim-treesitter-textobjects' -- Additional textobjects for treesitter
+  use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
+  use 'williamboman/mason.nvim' -- Manage external editor tooling i.e LSP servers
+  use 'williamboman/mason-lspconfig.nvim' -- Automatically install language servers to stdpath
+  use { 'hrsh7th/nvim-cmp', requires = { 'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-path' } } -- Autocompletion
+  use { 'L3MON4D3/LuaSnip', requires = { 'saadparwaiz1/cmp_luasnip' } } -- Snippet engine and snippet expansion
+  use 'jose-elias-alvarez/null-ls.nvim'
+  use 'onsails/lspkind-nvim'
+  use 'Mofiqul/dracula.nvim' -- Dracula theme
+  use 'nvim-lualine/lualine.nvim' -- Fancier statusline
+  use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
+  use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
+  use 'tpope/vim-surround'
+  use { 'AckslD/nvim-neoclip.lua', config = function() require('neoclip').setup() end }
+  use 'romainl/vim-qf'
+  use 'kyazdani42/nvim-web-devicons'
+  use 'yamatsum/nvim-web-nonicons'
+  use 'monaqa/dial.nvim'
+  use { 'TimUntersberger/neogit', requires = { 'nvim-lua/plenary.nvim', 'sindrets/diffview.nvim' } }
+  use 'rhysd/committia.vim'
 
   -- Fuzzy finder (files, lsp, etc.)
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
@@ -80,6 +88,25 @@ vim.o.smartcase = true
 vim.o.updatetime = 250
 vim.wo.signcolumn = 'yes'
 
+-- Cursorline highlighting control
+-- Only have it on in the active buffer
+vim.wo.cursorline = true
+local group = vim.api.nvim_create_augroup("CursorLineControl", { clear = true })
+local set_cursorline = function(event, value, pattern)
+  vim.api.nvim_create_autocmd(event, {
+    group = group,
+    pattern = pattern,
+    callback = function()
+      vim.opt_local.cursorline = value
+    end,
+  })
+end
+set_cursorline("WinLeave", false)
+set_cursorline("WinEnter", true)
+set_cursorline("FileType", false, "TelescopePrompt")
+
+vim.o.clipboard = "unnamedplus"
+
 -- Set colorscheme
 vim.o.termguicolors = true
 
@@ -105,8 +132,11 @@ vim.g.maplocalleader = ' '
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 -- Remap for dealing with word wrap
-vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true})
-vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true})
+vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+
+-- Turn off builtin plugins I do not use.
+require "oo.disable_builtin"
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -189,7 +219,7 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 -- See `help: nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = {'c', 'cpp', 'lua'},
+  ensure_installed = { 'c', 'cpp', 'lua' },
 
   highlight = { enable = true },
   indent = { enable = true },
@@ -389,7 +419,9 @@ cmp.setup {
   },
   sources = {
     { name = 'nvim_lsp' },
+    { name = 'path' },
     { name = 'luasnip' },
+    { name = 'buffer', keyword_length = 5 },
   },
 }
 
