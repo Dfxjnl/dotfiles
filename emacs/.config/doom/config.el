@@ -416,3 +416,9 @@
 (setq flycheck-checker-error-threshold nil)
 
 (add-hook! 'org-mode-hook #'solaire-mode)
+
+(setq lsp-clients-lua-language-server-bin "/home/hugo/.local/bin/lua-language-server"
+      lsp-clients-lua-lsp-server-install-dir "/home/hugo/git/sumneko_lua"
+      lsp-clients-lua-language-server-main-location "/home/hugo/git/sumneko_lua/bin/main.lua")
+
+(setq-hook! 'lua-mode-hook +format-with-lsp nil)
