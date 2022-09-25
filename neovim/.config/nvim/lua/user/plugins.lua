@@ -58,7 +58,11 @@ return packer.startup(function(use)
         { "hrsh7th/cmp-nvim-lua" },
     })
     use({ "nvim-telescope/telescope.nvim", requires = { "nvim-telescope/telescope-media-files.nvim" } })
-    use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+    use({
+        "nvim-treesitter/nvim-treesitter",
+        run = ":TSUpdate",
+        requires = { "p00f/nvim-ts-rainbow", "nvim-treesitter/playground" },
+    })
 
     -- Automatically set up your configuration after cloning packer.nvim.
     if is_bootstrap then
