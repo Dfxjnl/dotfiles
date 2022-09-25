@@ -66,6 +66,7 @@ return packer.startup(function(use)
         run = ":TSUpdate",
         requires = { "p00f/nvim-ts-rainbow", "nvim-treesitter/playground" },
     })
+    use({ "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons", opt = true } })
 
     -- Automatically set up your configuration after cloning packer.nvim.
     if is_bootstrap then
