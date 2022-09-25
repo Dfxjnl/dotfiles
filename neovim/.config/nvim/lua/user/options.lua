@@ -1,5 +1,6 @@
 -- :help options
 vim.opt.backup = true
+vim.opt.breakindent = true
 vim.opt.clipboard = "unnamedplus"
 vim.opt.completeopt = { "menuone", "noselect" }
 vim.opt.cursorline = true
@@ -16,6 +17,7 @@ vim.opt.shortmess:append("c")
 vim.opt.showmode = false
 vim.opt.sidescrolloff = 8
 vim.opt.signcolumn = "yes"
+vim.opt.signcolumn = "yes"
 vim.opt.smartcase = true
 vim.opt.smartindent = true
 vim.opt.splitbelow = true
@@ -23,6 +25,7 @@ vim.opt.splitright = true
 vim.opt.tabstop = 4
 -- vim.opt.termguicolors = true
 vim.opt.undofile = true
+vim.opt.updatetime = 250
 vim.opt.wrap = false
 
 vim.cmd("set whichwrap+=<,>,[,],h,l")

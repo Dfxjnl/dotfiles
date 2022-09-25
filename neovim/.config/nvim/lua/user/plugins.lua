@@ -2,7 +2,7 @@
 local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-    PACKER_BOOTSTRAP = vim.fn.system({
+    is_bootstrap = vim.fn.system({
         "git",
         "clone",
         "--depth",
@@ -45,6 +45,7 @@ return packer.startup(function(use)
     use("neovim/nvim-lspconfig")
     use("nvim-lua/plenary.nvim")
     use("nvim-lua/popup.nvim")
+    use("nvim-telescope/telescope.nvim")
     use("rafamadriz/friendly-snippets")
     use("wbthomason/packer.nvim")
     use("williamboman/nvim-lsp-installer")
@@ -59,7 +60,7 @@ return packer.startup(function(use)
     })
 
     -- Automatically set up your configuration after cloning packer.nvim.
-    if PACKER_BOOTSTRAP then
+    if is_bootstrap then
         require("packer").sync()
     end
 end)
