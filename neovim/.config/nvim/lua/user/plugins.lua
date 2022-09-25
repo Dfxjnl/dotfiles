@@ -58,6 +58,7 @@ return packer.startup(function(use)
         { "hrsh7th/cmp-nvim-lsp" },
         { "hrsh7th/cmp-nvim-lua" },
     })
+    use({ "numToStr/Comment.nvim", requires = { "JoosepAlviste/nvim-ts-context-commentstring" } })
     use({ "nvim-telescope/telescope.nvim", requires = { "nvim-telescope/telescope-media-files.nvim" } })
     use({
         "nvim-treesitter/nvim-treesitter",
