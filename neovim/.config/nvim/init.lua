@@ -78,7 +78,7 @@ vim.opt.backup = true
 vim.opt.backupdir = vim.fn.expand('~/.local/share/nvim/backup')
 vim.opt.breakindent = true
 vim.opt.clipboard = 'unnamedplus'
-vim.opt.completeopt = 'menu'
+vim.opt.completeopt = { 'menuone', 'noselect' }
 vim.opt.cpoptions:append('>')
 vim.opt.diffopt:append('hiddenoff')
 vim.opt.fillchars = 'diff: '
@@ -95,23 +95,25 @@ vim.opt.modelines = 0
 vim.opt.mouse = 'a'
 vim.opt.number = true
 vim.opt.numberwidth = 3
+vim.opt.pumheight = 10
 vim.opt.ruler = false
-vim.opt.scrolloff = 1
+vim.opt.scrolloff = 8
 vim.opt.sessionoptions:remove('folds')
 vim.opt.shiftround = true
 vim.opt.shortmess:append('Ic')
 vim.opt.showcmd = false
 vim.opt.showmode = false
-vim.opt.sidescroll = 10
+vim.opt.sidescrolloff = 10
 vim.opt.signcolumn = 'yes'
 vim.opt.smartcase = true
+vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.termguicolors = true
 vim.opt.timeoutlen = 250
 vim.opt.ttimeoutlen = -1
 vim.opt.undofile = true
 vim.opt.updatetime = 250
-vim.opt.whichwrap = '[,]'
+vim.opt.whichwrap = '<,>,[,],h,l'
 vim.opt.wrap = false
 
 vim.fn.mkdir(vim.fn.stdpath('data') .. '/backup/', 'p')
@@ -138,7 +140,6 @@ set_cursorline("FileType", false, "TelescopePrompt")
 -- See `:help mapleader`
 -- NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
 
 local init_lua_augroup = 'init_lua_augroup'
 
@@ -519,5 +520,12 @@ vim.keymap.set('n', '<a-i>', require('illuminate').toggle_pause)
 vim.g.Illuminate_delay = 100
 vim.g.Illuminate_ftwhitelist = { 'vim' }
 vim.g.qf_disable_statusline = true
+
+require('null-ls').setup({
+  sources = {
+    require('null-ls').builtins.formatting.stylua,
+    require('null-ls').builtins.completion.spell,
+  },
+})
 
 -- vim: ts=2 sts=2 sw=2 et
