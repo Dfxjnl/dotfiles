@@ -42,12 +42,21 @@ packer.init({
 -- Install plugins.
 return packer.startup(function(use)
     use("Mofiqul/dracula.nvim")
+    use("neovim/nvim-lspconfig")
     use("nvim-lua/plenary.nvim")
     use("nvim-lua/popup.nvim")
     use("rafamadriz/friendly-snippets")
+    use("tamago324/nlsp-settings.nvim")
     use("wbthomason/packer.nvim")
+    use("williamboman/nvim-lsp-installer")
     use({ "L3MON4D3/LuaSnip", requires = { "saadparwaiz1/cmp_luasnip" } })
-    use({ "hrsh7th/nvim-cmp", requires = { "hrsh7th/cmp-buffer" }, { "hrsh7th/cmp-cmdline" }, { "hrsh7th/cmp-path" } })
+    use({
+        "hrsh7th/nvim-cmp",
+        requires = { "hrsh7th/cmp-buffer" },
+        { "hrsh7th/cmp-cmdline" },
+        { "hrsh7th/cmp-path" },
+        { "hrsh7th/cmp-nvim-lsp" },
+    })
 
     -- Automatically set up your configuration after cloning packer.nvim.
     if PACKER_BOOTSTRAP then
