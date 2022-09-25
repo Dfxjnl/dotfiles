@@ -1,35 +1,28 @@
-local options = {
-    backup = true,
-    clipboard = "unnamedplus",
-    completeopt = { "menuone", "noselect" },
-    cursorline = true,
-    expandtab = true,
-    fileencoding = "utf-8",
-    ignorecase = true,
-    mouse = "a",
-    number = true,
-    pumheight = 10,
-    scrolloff = 8,
-    shiftround = true,
-    shiftwidth = 4,
-    showmode = false,
-    sidescrolloff = 8,
-    signcolumn = "yes",
-    smartcase = true,
-    smartindent = true,
-    splitbelow = true,
-    splitright = true,
-    tabstop = 4,
-    termguicolors = true,
-    undofile = true,
-    wrap = false,
-}
-
+vim.opt.backup = true,
+vim.opt.clipboard = "unnamedplus",
+vim.opt.completeopt = { "menuone", "noselect" },
+vim.opt.cursorline = true,
+vim.opt.expandtab = true,
+vim.opt.fileencoding = "utf-8",
+vim.opt.ignorecase = true,
+vim.opt.mouse = "a",
+vim.opt.number = true,
+vim.opt.pumheight = 10,
+vim.opt.scrolloff = 8,
+vim.opt.shiftround = true,
+vim.opt.shiftwidth = 4,
 vim.opt.shortmess:append("c")
-
-for k, v in pairs(options) do
-    vim.opt[k] = v
-end
+vim.opt.showmode = false,
+vim.opt.sidescrolloff = 8,
+vim.opt.signcolumn = "yes",
+vim.opt.smartcase = true,
+vim.opt.smartindent = true,
+vim.opt.splitbelow = true,
+vim.opt.splitright = true,
+vim.opt.tabstop = 4,
+vim.opt.termguicolors = true,
+vim.opt.undofile = true,
+vim.opt.wrap = false,
 
 vim.cmd("set whichwrap+=<,>,[,],h,l")
 vim.cmd([[set iskeyword+=-]])
