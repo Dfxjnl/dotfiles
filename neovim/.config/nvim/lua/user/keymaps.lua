@@ -33,11 +33,7 @@ vim.api.nvim_set_keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 vim.api.nvim_set_keymap("n", "<Leader>bn", ":bnext<CR>", opts)
 vim.api.nvim_set_keymap("n", "<Leader>bp", ":bprevious<CR>", opts)
 
--- Move text up and down.
-vim.api.nvim_set_keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
-vim.api.nvim_set_keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
-
--- Insert mode --
+-- Insert --
 -- Press jk to exit insert mode.
 vim.api.nvim_set_keymap("i", "jk", "<Esc>", opts)
 
