@@ -46,7 +46,6 @@ return packer.startup(function(use)
     use("nvim-lua/plenary.nvim")
     use("nvim-lua/popup.nvim")
     use("rafamadriz/friendly-snippets")
-    use("tamago324/nlsp-settings.nvim")
     use("wbthomason/packer.nvim")
     use("williamboman/nvim-lsp-installer")
     use({ "L3MON4D3/LuaSnip", requires = { "saadparwaiz1/cmp_luasnip" } })
@@ -56,6 +55,7 @@ return packer.startup(function(use)
         { "hrsh7th/cmp-cmdline" },
         { "hrsh7th/cmp-path" },
         { "hrsh7th/cmp-nvim-lsp" },
+        { "hrsh7th/cmp-nvim-lua" },
     })
 
     -- Automatically set up your configuration after cloning packer.nvim.
