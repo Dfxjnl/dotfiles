@@ -50,7 +50,7 @@ export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
 
 export PASSWORD_STORE_DIR="$HOME/.secrets/password-store"
 
-export TMUX_HOME="XDG_CONFIG_HOME/tmux"
+export TMUX_HOME="$XDG_CONFIG_HOME/tmux"
 export TMUXIFIER="$XDG_DATA_HOME/tmuxifier"
 export TMUXIFIER_LAYOUT_PATH="$XDG_DATA_HOME/tmuxifier"
 

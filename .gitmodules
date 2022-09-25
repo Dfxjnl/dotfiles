@@ -13,3 +13,6 @@
 [submodule "tmux/.local/share/tmuxifier"]
 	path = tmux/.local/share/tmuxifier
 	url = https://github.com/jimeh/tmuxifier
+[submodule "kitty/.config/kitty/dracula"]
+	path = kitty/.config/kitty/dracula
+	url = gh:dracula/kitty
