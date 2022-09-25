@@ -16,12 +16,12 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 end
 
 -- Autocommand that reloads neovim whenever you save the plugins.lua file.
-vim.cmd([[
-augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerSync
-augroup end
-]])
+local packer_group = vim.api.nvim_create_augroup("Packer", { clear = true })
+vim.api.nvim_create_autocmd("BufWritePost", {
+    command = "source <afile> | PackerCompile",
+    group = packer_group,
+    pattern = vim.fn.expand("$MYVIMRC"),
+})
 
 -- Use a protected call so we don't error out on first use.
 local status_ok, packer = pcall(require, "packer")
@@ -42,31 +42,35 @@ packer.init({
 -- Install plugins.
 return packer.startup(function(use)
     use("Mofiqul/dracula.nvim")
-    use("lewis6991/gitsigns.nvim")
+    use("lukas-reineke/indent-blankline.nvim")
     use("neovim/nvim-lspconfig")
-    use("nvim-lua/plenary.nvim")
-    use("nvim-lua/popup.nvim")
-    use("rafamadriz/friendly-snippets")
+    use("numToStr/Comment.nvim")
     use("wbthomason/packer.nvim")
-    use("williamboman/nvim-lsp-installer")
-    use("windwp/nvim-autopairs")
-    use({ "L3MON4D3/LuaSnip", requires = { "saadparwaiz1/cmp_luasnip" } })
+    use("williamboman/mason-lspconfig.nvim")
+    use("williamboman/mason.nvim")
+    use({ "L3MON4D3/LuaSnip", requires = "saadparwaiz1/cmp_luasnip" })
     use({
         "hrsh7th/nvim-cmp",
-        requires = { "hrsh7th/cmp-buffer" },
-        { "hrsh7th/cmp-cmdline" },
-        { "hrsh7th/cmp-path" },
-        { "hrsh7th/cmp-nvim-lsp" },
-        { "hrsh7th/cmp-nvim-lua" },
+        requires = {
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-cmdline",
+            "hrsh7th/cmp-path",
+            "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-nvim-lua",
+        },
     })
-    use({ "numToStr/Comment.nvim", requires = { "JoosepAlviste/nvim-ts-context-commentstring" } })
-    use({ "nvim-telescope/telescope.nvim", requires = { "nvim-telescope/telescope-media-files.nvim" } })
+    use({ "lewis6991/gitsigns.nvim", requires = "nvim-lua/plenary.nvim" })
+    use({ "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons", opt = true } })
+    use({
+        "nvim-telescope/telescope-fzf-native.nvim",
+        run = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+    })
+    use({ "nvim-telescope/telescope.nvim", branch = "0.1.x", requires = "nvim-lua/plenary.nvim" })
     use({
         "nvim-treesitter/nvim-treesitter",
         run = ":TSUpdate",
-        requires = { "p00f/nvim-ts-rainbow", "nvim-treesitter/playground" },
+        requires = "nvim-treesitter/nvim-treesitter-textobjects",
     })
-    use({ "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons", opt = true } })
 
     -- Automatically set up your configuration after cloning packer.nvim.
     if is_bootstrap then

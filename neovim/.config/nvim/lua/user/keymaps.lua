@@ -33,6 +33,12 @@ vim.api.nvim_set_keymap("n", "<Leader>bp", ":bprevious<CR>", opts)
 -- Save file.
 vim.keymap.set("n", "<Leader>fs", ":write<CR>", opts)
 
+-- Diagnostics.
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
+vim.keymap.set("n", "<Leader>e", vim.diagnostic.open_float)
+vim.keymap.set("n", "<Leader>q", vim.diagnostic.setloclist)
+
 -- Insert --
 -- Press jk to exit insert mode.
 vim.api.nvim_set_keymap("i", "jk", "<Esc>", opts)
@@ -48,11 +54,3 @@ vim.api.nvim_set_keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
 vim.api.nvim_set_keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
 vim.api.nvim_set_keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 vim.api.nvim_set_keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
-
-vim.api.nvim_set_keymap(
-    "n",
-    "<Leader>f",
-    "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<CR>",
-    opts
-)
-vim.api.nvim_set_keymap("n", "<C-t>", "<cmd>Telescope live_grep<CR>", opts)

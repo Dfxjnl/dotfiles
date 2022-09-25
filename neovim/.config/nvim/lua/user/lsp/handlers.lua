@@ -57,27 +57,42 @@ local function lsp_highlight_document(client)
 end
 
 local function lsp_keymaps(bufnr)
-    local opts = { noremap = true, silent = true }
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-    -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<Leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-    -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<Leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-    -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<Leader>f", "<cmd>lua vim.lsp.buf.open_float()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", '<cmd>lua vim.lsp.buf.goto_prev({ border = "rounded" )<CR>', opts)
-    vim.api.nvim_buf_set_keymap(
-        bufnr,
-        "n",
-        "gl",
-        '<cmd>lua vim.lsp.buf.show_line_diagnostics({ border = "rounded" })<CR>',
-        opts
-    )
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", '<cmd>lua vim.lsp.buf.goto_next({ border = "rounded" )<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "<Leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
-    vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
+    local nmap = function(keys, func, desc)
+        if desc then
+            desc = "LSP: " .. desc
+        end
+
+        vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
+    end
+
+    nmap("<Leader>cr", vim.lsp.buf.rename, "[C] [R]ename")
+    nmap("<Leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
+
+    nmap("<Leader>gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
+    nmap("<Leader>gi", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
+    nmap("<Leader>gr", require("telescope.builtin").lsp_references)
+    nmap("<Leader>cds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
+    nmap("<Leader>cws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+
+    nmap("K", vim.lsp.buf.hover, "Hover Documentation")
+    nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
+
+    nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+    nmap("<Leader>D", vim.lsp.buf.type_definition, "Type [D]efinition")
+    nmap("<Leader>wa", vim.lsp.buf.add_workspace_folder, "[W]orkspace [A]dd Folder")
+    nmap("<Leader>wr", vim.lsp.buf.remove_workspace_folder, "[W]orkspace [R]emove Folder")
+    nmap("<Leader>wl", function()
+        print(vim.inspect(vim.lsp.list_workspace_folders()))
+    end, "[W]orkspace [L]ist Folders")
+
+    -- Create a command `:Format` local to the LSP buffer.
+    vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
+        if vim.lsp.buf.format then
+            vim.lsp.buf.format()
+        elseif vim.lsp.buf.formatting then
+            vim.lsp.buf.formatting()
+        end
+    end, { desc = "Format current buffer with LSP" })
 end
 
 M.on_attach = function(client, bufnr)
