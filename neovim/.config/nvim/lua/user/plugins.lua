@@ -41,6 +41,7 @@ packer.init({
 
 -- Install plugins.
 return packer.startup(function(use)
+    use("Mofiqul/dracula.nvim")
     use("nvim-lua/plenary.nvim")
     use("nvim-lua/popup.nvim")
     use("wbthomason/packer.nvim")
