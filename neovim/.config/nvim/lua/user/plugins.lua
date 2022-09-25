@@ -48,6 +48,7 @@ return packer.startup(function(use)
     use("rafamadriz/friendly-snippets")
     use("wbthomason/packer.nvim")
     use("williamboman/nvim-lsp-installer")
+    use("windwp/nvim-autopairs")
     use({ "L3MON4D3/LuaSnip", requires = { "saadparwaiz1/cmp_luasnip" } })
     use({
         "hrsh7th/nvim-cmp",
