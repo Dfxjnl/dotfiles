@@ -44,7 +44,10 @@ return packer.startup(function(use)
     use("Mofiqul/dracula.nvim")
     use("nvim-lua/plenary.nvim")
     use("nvim-lua/popup.nvim")
+    use("rafamadriz/friendly-snippets")
     use("wbthomason/packer.nvim")
+    use({ "L3MON4D3/LuaSnip", requires = { "saadparwaiz1/cmp_luasnip" } })
+    use({ "hrsh7th/nvim-cmp", requires = { "hrsh7th/cmp-buffer" }, { "hrsh7th/cmp-cmdline" }, { "hrsh7th/cmp-path" } })
 
     -- Automatically set up your configuration after cloning packer.nvim.
     if PACKER_BOOTSTRAP then
