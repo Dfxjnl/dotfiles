@@ -45,7 +45,6 @@ return packer.startup(function(use)
     use("neovim/nvim-lspconfig")
     use("nvim-lua/plenary.nvim")
     use("nvim-lua/popup.nvim")
-    use("nvim-telescope/telescope.nvim")
     use("rafamadriz/friendly-snippets")
     use("wbthomason/packer.nvim")
     use("williamboman/nvim-lsp-installer")
@@ -58,6 +57,7 @@ return packer.startup(function(use)
         { "hrsh7th/cmp-nvim-lsp" },
         { "hrsh7th/cmp-nvim-lua" },
     })
+    use({ "nvim-telescope/telescope.nvim", requires = { "nvim-telescope/telescope-media-files.nvim" } })
 
     -- Automatically set up your configuration after cloning packer.nvim.
     if is_bootstrap then

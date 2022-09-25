@@ -4,10 +4,11 @@ if not status_ok then
     return
 end
 
+telescope.load_extension("media_files")
 local actions = require("telescope.actions")
 
 telescope.setup({
-    default = {
+    defaults = {
         -- prompt_prefix = "\uf46b ",
         -- selection_caret = "\uf064 ",
         path_display = { "smart" },
@@ -75,6 +76,12 @@ telescope.setup({
 
                 ["?"] = actions.which_key,
             },
+        },
+    },
+    extensions = {
+        media_files = {
+            filetypes = { "png", "jpg", "jpeg" },
+            find_cmg = "rg",
         },
     },
 })
