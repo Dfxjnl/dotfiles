@@ -8,7 +8,6 @@ super + w; super + b
 # than attaching to one that is already attached to elsewhere.
 super + Return
       kitty --single-instance bash -c "(tmux ls | grep -qev 'attached|scratch' && tmux at) || tmux"
-      # alacritty -e bash -c "(tmux ls | grep -qev 'attached|scratch' && tmux at) || tmux"
       
 # Start a plain ol' terminal
 super + ctrl + Return
