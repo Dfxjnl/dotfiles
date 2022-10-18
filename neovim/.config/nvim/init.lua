@@ -15,7 +15,8 @@ require("packer").startup(function(use)
   use("numToStr/Comment.nvim") -- "gc" to comment visual regions/lines
   use("nvim-lualine/lualine.nvim") -- Fancier statusline
   use("nvim-treesitter/nvim-treesitter") -- Highlight, edit, and navigate code
-  use({ "nvim-treesitter/nvim-treesitter-textobjects", after = { "nvim-treesitter" } }) -- Additional textobjects for treesitter
+  -- Additional textobjects for treesitter.
+  use({ "nvim-treesitter/nvim-treesitter-textobjects", after = { "nvim-treesitter" } })
   use("romainl/vim-cool") -- A very simple plugin that makes hlsearch more useful.
   use("tpope/vim-fugitive") -- Git commands in nvim
   use("tpope/vim-rhubarb") -- Fugitive-companion to interact with github
@@ -24,7 +25,8 @@ require("packer").startup(function(use)
   use("williamboman/mason.nvim") -- Manage external editor tooling i.e LSP servers
   use({ "L3MON4D3/LuaSnip", requires = { "saadparwaiz1/cmp_luasnip" } }) -- Snippet Engine and Snippet Expansion
   use({ "hrsh7th/nvim-cmp", requires = { "hrsh7th/cmp-nvim-lsp" } }) -- Autocompletion
-  use({ "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" } }) -- Add git related info in the signs columns and popups
+  -- Add git related info in the signs columns and popups.
+  use({ "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" } })
   use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make", cond = vim.fn.executable("make") == 1 })
   use({ "nvim-telescope/telescope.nvim", branch = "0.1.x", requires = { "nvim-lua/plenary.nvim" } })
   use({ "jose-elias-alvarez/null-ls.nvim", requires = { "nvim-lua/plenary.nvim" } })
@@ -292,7 +294,7 @@ local on_attach = function(_, bufnr)
 end
 
 -- nvim-cmp supports additional completion capabilities
-local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 -- Setup mason so it can manage external tooling
 require("mason").setup()
