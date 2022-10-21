@@ -1,5 +1,5 @@
 /* -*- mode: css; -*- */
-
+@import "dracula/theme/config1.rasi"
 @import "config.rasi"
 
 textbox-icon {

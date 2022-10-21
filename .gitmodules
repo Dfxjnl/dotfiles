@@ -16,3 +16,6 @@
 [submodule "kitty/.config/kitty/dracula"]
 	path = kitty/.config/kitty/dracula
 	url = gh:dracula/kitty
+[submodule "rofi/.config/rofi/dracula"]
+	path = rofi/.config/rofi/dracula
+	url = https://github.com/dracula/rofi
