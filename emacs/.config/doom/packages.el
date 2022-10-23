@@ -48,13 +48,3 @@
 ;(unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
-(package!
-  elisp-autofmt
-  :recipe
-  (:repo
-    "https://codeberg.org/ideasman42/emacs-elisp-autofmt.git"
-    :files (:defaults "elisp-autofmt")))
-
-(package! highlight-escape-sequences)
-
-(package! vlf)

@@ -29,7 +29,7 @@ if ! zgenom saved; then
     zgenom load gentoo/gentoo-zsh-completions src
     zgenom load zsh-users/zsh-autosuggestions
     zgenom load zsh-users/zsh-history-substring-search
-    zgenom load romkatv/powerlevel10k powerlevel10k
+    # zgenom load romkatv/powerlevel10k powerlevel10k
     zgenom load hlissner/zsh-autopair autopair.zsh
 
     zgenom save
@@ -39,17 +39,11 @@ fi
 ## Bootstrap interactive sessions
 if [[ $TERM != dumb ]]; then
     autoload -Uz compinit && compinit -u -d $ZSH_CACHE/zcompdump
-
     source $ZDOTDIR/keybinds.zsh
     source $ZDOTDIR/completion.zsh
     source $ZDOTDIR/aliases.zsh
-
     source $ZDOTDIR/prompt.zsh
-
     _cache tmuxifier init -
-
-    eval "$(direnv hook zsh)"
-
     _cache fasd --init posix-alias zsh-{hook,{c,w}comp{,-install}}
     autopair-init
 fi

@@ -24,7 +24,6 @@ export SUDO_EDITOR="nvim"
 
 # Misc
 export MAKEFLAGS="-j $(nproc)"
-export NSS_DEFAULT_DB_TYPE="sql"
 export SUDO_PROMPT="sudo password for %p@[30;43m%h[m: "
 
 # zsh
@@ -41,7 +40,6 @@ export MOZ_X11_EGL="1"
 export MOZ_WEBRENDER="1"
 
 # Conform more programs to XDG conventions.
-export ASPELL_CONF="per-conf $XDG_CONFIG_HOME/aspell/aspell.conf; personal $XDG_CONFIG_HOME/aspell/en_US.pws; repl $XDG_CONFIG_HOME/aspell/en.prepl"
 export HISTFILE="$XDG_DATA_HOME/bash/history"
 export LESSHISTFILE="$XDG_CACHE_HOME/lesshst"
 export WGETRC="$XDG_CONFIG_HOME/wgetrc"
@@ -62,22 +60,14 @@ export NPM_CONFIG_TMP="$XDG_RUNTIME_DIR/npm"
 export NPM_CONFIG_PREFIX="$XDG_CACHE_HOME/npm"
 export NODE_REPL_HISTORY="$XDG_CACHE_HOME/node/repl_history"
 
-export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
-
-export IPYTHONDIR="$XDG_CONFIG_HOME/ipython"
-export PIP_CONFIG_FILE="$XDG_CONFIG_HOME/pip/pip.conf"
-export PIP_LOG_FILE="$XDG_DATA_HOME/pip/log"
-export PYLINTHOME="$XDG_DATA_HOME/pylint"
-export PYLINTRC="$XDG_CONFIG_HOME/pylint/pylintrc"
-export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/pythonrc"
-export PYTHON_EGG_CACHE="$XDG_CACHE_HOME/python-eggs"
-export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME/jupyter"
 
 export PATH="$XDG_BIN_HOME:$TMUXIFIER/bin:$XDG_CONFIG_HOME/emacs/bin:$NPM_CONFIG_PREFIX/bin:$CARGO_HOME/bin:$PATH"
 
 export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
 [ -e ~/.Xauthority ] && mv -f ~/.Xauthority "$XAUTHORITY"
+
+export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/config"
 
 function _cache {
     (( $+commands[$1] )) || return 1
