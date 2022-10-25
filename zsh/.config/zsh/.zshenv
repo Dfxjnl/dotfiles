@@ -69,6 +69,9 @@ export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
 
 export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/config"
 
+export PIP_CONFIG_FILE="$XDG_CONFIG_HOME/pip/pip.conf"
+export PIP_LOG_FILE="$XDG_DATA_HOME/pip/log"
+
 function _cache {
     (( $+commands[$1] )) || return 1
     local cache_dir="$XDG_CACHE_HOME/${SHELL##*/}"
