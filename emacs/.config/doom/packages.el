@@ -48,3 +48,19 @@
 ;(unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
+(package! aas
+  :recipe (:host github :repo "ymarco/auto-activating-snippets"))
+
+(package! page-break-lines
+  :recipe (:host github :repo "purcell/page-break-lines"))
+
+(package! nov)
+
+(package! org-appear
+  :recipe (:host github :repo "awth13/org-appear"))
+
+(package! org-transclusion
+  :recipe (:host github :repo "nobiot/org-transclusion"))
+
+(package! cmake-font-lock
+  :recipe (:host github :repo "Lindydancer/cmake-font-lock"))
