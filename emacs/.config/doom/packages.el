@@ -64,3 +64,5 @@
 
 (package! cmake-font-lock
   :recipe (:host github :repo "Lindydancer/cmake-font-lock"))
+
+;; (package! flycheck-inline)

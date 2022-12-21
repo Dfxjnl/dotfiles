@@ -82,7 +82,8 @@
 (after! evil
   (setq evil-ex-substitute-global t
         evil-kill-on-visual-paste nil
-        evil-move-cursor-back nil))
+        evil-move-cursor-back nil
+        +evil-want-o/O-to-continue-comments nil))
 
 (after! lsp-clangd
   (setq lsp-clients-clangd-args
@@ -99,6 +100,8 @@
   (set-lsp-priority! 'clangd 2))
 
 (after! flycheck
+  ;; (add-hook 'flycheck-mode-hook #'flycheck-inline-mode)
+
   (defvar-local my/flycheck-local-cache nil)
   (defun my/flycheck-checker-get (fn checker property)
     (or
@@ -124,8 +127,6 @@
                 (setq my/flycheck-local-cache
                       '((lsp . ((next-checkers . (python-flake8)))))))))
   (setq flycheck-checker-error-threshold nil))
-
-(+global-word-wrap-mode +1)
 
 (setq +treemacs-git-mode 'deferred)
 
@@ -348,3 +349,14 @@ while keeping some faces fixed pitch."
       lsp-ui-sideline-show-hover t)
 
 (setq fill-column 100)
+
+(after! projectile
+  (setq projectile-enable-cmake-presets t
+        projectile-project-search-path '(("~/development/" . 1))))
+
+(after! lsp-mode
+  (setq lsp-idle-delay 0.1))
+
+(after! company
+  (setq company-idle-delay 0.0
+        company-minimum-prefix-length 1))
