@@ -7,7 +7,7 @@
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
 (setq user-full-name "Hugo Pungs"
-      user-mail-address "dfxjnl@gmail.com")
+      user-mail-address "hugo.pungs@gmail.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom:
 ;;
@@ -81,7 +81,6 @@
 ;; they are implemented.
 (after! evil
   (setq evil-ex-substitute-global t
-        evil-kill-on-visual-paste nil
         evil-move-cursor-back nil
         +evil-want-o/O-to-continue-comments nil))
 
@@ -130,10 +129,6 @@
 
 (setq +treemacs-git-mode 'deferred)
 
-(after! org
-  org-use-property-inheritance t
-  org-log-done 'time)
-
 (use-package! org-appear
   :config
   (setq org-appear-autoemphasis t
@@ -142,12 +137,6 @@
   ;; For proper first-time setup, `org-appear--set-elements' needs to be run after other hooks have acted.
   (run-at-time nil nil #'org-appear--set-elements)
   :hook (org-mode. org-appear-mode))
-
-(use-package! org-transclusion
-  :init
-  (map! :after org :map org-mode-map
-        "<f12>" #'org-transclusion-mode)
-  :commands org-transclusion-mode)
 
 (add-hook 'org-mode-hook #'+org-pretty-mode)
 
@@ -158,9 +147,6 @@
             '(("\\`g s" . "\\`evilem--?motion-\\(.*\\)") . (nil . "◃\\1"))))
 
 (setq-default history-length 1000)
-
-(use-package! aas
-  :commands aas-mode)
 
 (after! yasnippet
   (setq yas-triggers-in-field t))
@@ -205,8 +191,6 @@ while keeping some faces fixed pitch."
 (set-char-table-range composition-function-table ?T '(["\\(?:Th\\)" 0 font-shape-gstring]))
 
 (after! marginalia
-  (setq marginalia-censor-variables nil)
-
   (defadvice! +marginalia--anotate-local-file-colorful (cand)
     "Just a more colorful version of `marginalia--annotate-local-file'."
     :override #'marginalia--annotate-local-file
@@ -233,16 +217,6 @@ while keeping some faces fixed pitch."
                       (doom-blend 'orange 'green size-index)
                     (doom-blend 'red 'orange (- size-index 1)))))
       (propertize (file-size-human-readable size) 'face (list :foreground color)))))
-
-(use-package! page-break-lines
-  :commands page-break-lines-mode
-  :config
-  (setq page-break-lines-max-width fill-column)
-  (map! :prefix "g"
-        :desc "Prev page break" :nv "[" #'backward-page
-        :desc "Next page break" :nv "]" #'forward-page)
-  :init
-  (autoload 'turn-on-page-break-lines-mode "page-break-lines"))
 
 (setq +zen-text-scale 0.8)
 
@@ -290,61 +264,6 @@ while keeping some faces fixed pitch."
                   (org-superstar-restart))
                 (when +zen--original-org-indent-mode-p (org-indent-mode 1))))))
 
-(use-package! nov
-  :config
-  (map! :map nov-mode-map
-        :n "RET" #'nov-scroll-up)
-
-  (defun doom-modeline-segment--nov-info ()
-    (concat " "
-            (propertize (cdr (assoc 'creator nov-metadata)) 'face 'doom-modeline-project-parent-dir)
-            " "
-            (cdr (assoc 'title nov-metadata))
-            " "
-            (propertize (format "%d/%d"
-                                (1+ nov-documents-index)
-                                (length nov-documents))
-                        'face 'doom-modeline-info)))
-
-  (advice-add 'nov-render-title :override #'ignore)
-
-  (defun +nov-mode-setup ()
-    (setq-local line-spacing 0.2
-                next-screen-context-lines 4
-                shr-use-colors nil)
-    (require 'visual-fill-column nil t)
-    (setq-local visual-fill-column-center-text t
-                visual-fill-column-width 81
-                nov-text-width 80)
-    (visual-fill-column-mode 1)
-    (hl-line-mode -1)
-
-    (add-to-list '+lookup-definition-functions #'+lookup/dictionary-definition)
-
-    (setq-local mode-line-format
-                `((:eval (doom-modeline-segment--workspace-name))
-                  (:eval (doom-modeline-segment--window-number))
-                  (:eval (doom-modeline-segment--nov-info))
-                  ,(propertize " %P " 'face 'doom-modeline-buffer-minor-mode)
-                  ,(propertize " " 'face (if (doom-modeline--active) 'mode-line 'mode-line-inactive)
-                               'display `((space
-                                           :align-to
-                                           (- (+ right right-fringe right-margin)
-                                              ,(* (let ((width (doom-modeline--font-width)))
-                                                    (or (and (= width 1) 1)
-                                                        (/ width (frame-char-width) 1.0)))
-                                                  (string-width
-                                                   (format-mode-line
-                                                    (cons ""
-                                                          '(:eval (doom-modeline-segment--major-mode))))))))))
-                  (:eval (doom-modeline-segment--major-mode)))))
-
-  (add-hook 'nov-mode-hook #'+nov-mode-setup)
-  :mode ("\\.epub\\'" . nov-mode))
-
-(after! calc
-  (setq calc-symbolic-mode t))
-
 (setq lsp-ui-doc-show-with-mouse t
       lsp-ui-sideline-show-hover t)
 
@@ -360,3 +279,5 @@ while keeping some faces fixed pitch."
 (after! company
   (setq company-idle-delay 0.0
         company-minimum-prefix-length 1))
+
+(+global-word-wrap-mode +1)
