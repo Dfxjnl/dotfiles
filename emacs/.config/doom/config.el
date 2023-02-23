@@ -46,6 +46,10 @@
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
 
+;; smooth scroll
+(setq scroll-conservatively 10000
+      scroll-step 1)
+
 (pixel-scroll-mode 1)
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
@@ -124,7 +128,10 @@
                 (flycheck-add-next-checker 'json-jsonlint 'json-jq))
               (when (derived-mode-p 'python-mode)
                 (setq my/flycheck-local-cache
-                      '((lsp . ((next-checkers . (python-flake8)))))))))
+                      '((lsp . ((next-checkers . (python-flake8)))))))
+              (when (derived-mode-p 'sh-mode)
+                (setq my/flycheck-local-cache
+                      '((lsp . ((next-checkers . (sh-posix-bash)))))))))
   (setq flycheck-checker-error-threshold nil))
 
 (setq +treemacs-git-mode 'deferred)
