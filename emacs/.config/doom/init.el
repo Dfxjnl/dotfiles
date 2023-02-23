@@ -21,7 +21,7 @@
        ;;layout                               ; auie,ctsrnm is the superior home row
 
        :completion
-       (company +childframe)                  ; the ultimate code completion backend
+       (company +childframe +tng)             ; the ultimate code completion backend
        ;;helm                                 ; the *other* search engine for love and life
        ;;ido                                  ; the other *other* search engine...
        ;;ivy                                  ; a search engine for love and life
@@ -62,7 +62,7 @@
        multiple-cursors                       ; editing in many places at once
        ;;objed                                ; text object editing for the innocent
        ;;parinfer                             ; turn lisp into python, sort of
-       rotate-text                            ; cycle region at point between text candidates
+       ;;rotate-text                          ; cycle region at point between text candidates
        snippets                               ; my elves. They type so I don't have to
        word-wrap                              ; soft wrapping with language-aware indent
 
@@ -77,7 +77,7 @@
        ;;eshell                               ; the elisp shell that works everywhere
        ;;shell                                ; simple shell REPL for Emacs
        ;;term                                 ; basic terminal emulator for Emacs
-       vterm                                  ; the best terminal emulation in Emacs
+       ;;vterm                                ; the best terminal emulation in Emacs
 
        :checkers
        (syntax +childframe)                   ; tasing you for every semicolon you forget
@@ -149,7 +149,7 @@
        ;;lean                                 ; for folks with too much to prove
        ;;ledger                               ; be audit you can be
        ;;lua                                  ; one-based indices? one-based indices
-       (markdown +grip)                       ; writing docs for people to ignore
+       ;;(markdown +grip)                     ; writing docs for people to ignore
        ;;nim                                  ; python + lisp at the speed of c
        ;;nix                                  ; I hereby declare "nix geht mehr!"
        ;;ocaml                                ; an objective camel
@@ -157,7 +157,7 @@
        ;;php                                  ; perl's insecure younger brother
        ;;plantuml                             ; diagrams for confusing people more
        ;;purescript                           ; javascript, but functional
-       (python +lsp +pyright +tree-sitter)    ; beautiful is better than ugly
+       ;;(python +lsp +pyright +tree-sitter)  ; beautiful is better than ugly
        ;;qt                                   ; the 'cutest' gui framework ever
        ;;racket                               ; a DSL for DSLs
        ;;raku                                 ; the artist formerly known as perl6

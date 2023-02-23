@@ -62,7 +62,7 @@ export NODE_REPL_HISTORY="$XDG_CACHE_HOME/node/repl_history"
 
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 
-export PATH="$XDG_BIN_HOME:$TMUXIFIER/bin:$XDG_CONFIG_HOME/emacs/bin:$NPM_CONFIG_PREFIX/bin:$CARGO_HOME/bin:$HOME/.python_venv/bin:$PATH"
+export PATH="$XDG_BIN_HOME:$TMUXIFIER/bin:$XDG_CONFIG_HOME/emacs/bin:$NPM_CONFIG_PREFIX/bin:$CARGO_HOME/bin:$HOME/.python_venv/bin:$HOME/go/bin:$PATH"
 
 export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
 [ -e ~/.Xauthority ] && mv -f ~/.Xauthority "$XAUTHORITY"
