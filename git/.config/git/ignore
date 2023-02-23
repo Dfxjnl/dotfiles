@@ -1,36 +1,22 @@
-# For emacs:
+# Linux
 *~
-*.*~
-\#*
-.\#*
 
-# For vim:
-*.swp
-.*.sw[a-z]
-*.un~
+# vim
+# Swap
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+
+# Session
+Session.vim
+Sessionx.vim
+
+# Temporary
 .netrwhist
-
-# OS generated files #
-######################
-.DS_Store?
-.DS_Store
-.CFUserTextEncoding
-.Trash
-.Xauthority
-thumbs.db
-Thumbs.db
-Icon?
-
-# Code stuff #
-##############
-.ccls-cache/
-.sass-cache/
-__pycache__/
-
-# Compiled things #
-###################
-*.class
-*.exe
-*.o
-*.pyc
-*.elc
+*~
+# Auto-generated tag files
+tags
+# Persistent undo
+[._]*.un~
