@@ -1,14 +1,22 @@
-alias ..='cd ..'
-alias ...='cd ../../'
-alias ....='cd ../../..'
-alias -- -='cd -'
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias cd..="cd .."
 
-alias clr=clear
-alias cp='cp -iv'
+alias cp="cp -iv"
+#             │└─ list copied files
+#             └─ prompt before overwriting an existing file
+
+alias mkdir="mkdir -pv"
+#                   │└─ list created directories
+#                   └─ create intermediate directories
+
+alias mv="mv -iv"
+#             │└─ list moved files
+#             └─ prompt before overwriting an existing file
+
 alias df='df -h'
 alias du='du -h'
-alias mkdir='mkdir -pv'
-alias mv='mv -iv'
 alias path='echo -e ${PATH//:/\\n}'
 alias q=exit
 alias rm='rm -iv'
