@@ -36,6 +36,7 @@
       doom-font (font-spec :family "JetBrains Mono" :size 13)
       doom-variable-pitch-font (font-spec :family "DejaVu Sans" :size 13)
       doom-big-font (font-spec :family "JetBrains Mono" :size 24)
+      doom-unicode-font (font-spec :family "Symbola" :size 13)
       doom-serif-font (font-spec :family "DejaVu Serif" :size 13))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line

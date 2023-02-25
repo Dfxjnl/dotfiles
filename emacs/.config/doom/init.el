@@ -21,7 +21,7 @@
        ;;layout                               ; auie,ctsrnm is the superior home row
 
        :completion
-       (company +childframe +tng)             ; the ultimate code completion backend
+       (company +childframe)                  ; the ultimate code completion backend
        ;;helm                                 ; the *other* search engine for love and life
        ;;ido                                  ; the other *other* search engine...
        ;;ivy                                  ; a search engine for love and life
@@ -164,7 +164,7 @@
        ;;rest                                 ; Emacs as a REST client
        ;;rst                                  ; ReST in peace
        ;;(ruby +rails)                        ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
-       ;;(rust +lsp)                          ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
+       (rust +lsp +tree-sitter)               ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        ;;scala                                ; java, but good
        ;;(scheme +guile)                      ; a fully conniving family of lisps
        (sh +lsp +tree-sitter)                 ; she sells {ba,z,fi}sh shells on the C xor
