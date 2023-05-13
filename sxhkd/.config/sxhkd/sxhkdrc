@@ -48,8 +48,8 @@ super + alt + Escape
 ##
 
 ## Toggle floating/fullscreen
-super + w; super + {_,shift +}f
-      bspc node -t ~{floating,fullscreen}
+super + w; super + {_,shift + }f
+      bspc node -t {floating,fullscreen}
 
 # Focus/swap window directionally
 super + {_,shift + }{h,j,k,l}

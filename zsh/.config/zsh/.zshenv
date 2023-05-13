@@ -19,7 +19,7 @@ export TZ="America/Recife"
 # Preferred programs
 export BROWSER="firefox"
 export EDITOR="nvim"
-export VISUAL="emacsclient -c"
+export VISUAL="nvim"
 export SUDO_EDITOR="nvim"
 
 # Misc

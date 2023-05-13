@@ -2,12 +2,6 @@
 -- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
 -- Add any additional autocmds here
 
--- Fixes autocomment
-vim.api.nvim_create_autocmd("BufEnter", {
-  pattern = "*",
-  command = "set fo-=c fo-=r fo-=o",
-})
-
 -- Show cursor line only in active window
 vim.api.nvim_create_autocmd({ "InsertLeave", "WinEnter" }, {
   callback = function()
@@ -32,10 +26,9 @@ vim.api.nvim_create_autocmd({ "InsertEnter", "WinLeave" }, {
 
 -- Create directories when needed, when saving a file
 vim.api.nvim_create_autocmd("BufWritePre", {
-  group = vim.api.nvim_create_augroup("auto_create_dir", { clear = true }),
+  group = vim.api.nvim_create_augroup("better_backup", { clear = true }),
   callback = function(event)
     local file = vim.loop.fs_realpath(event.match) or event.match
-    vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
     local backup = vim.fn.fnamemodify(file, ":p:~:h")
     backup = backup:gsub("[/\\]", "%%")
     vim.go.backupext = backup
