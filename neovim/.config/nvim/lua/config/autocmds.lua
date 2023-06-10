@@ -2,6 +2,12 @@
 -- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
 -- Add any additional autocmds here
 
+-- Fixes autocomment
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = "*",
+  command = "set fo-=c fo-=r fo-=o",
+})
+
 -- Show cursor line only in active window
 vim.api.nvim_create_autocmd({ "InsertLeave", "WinEnter" }, {
   callback = function()
