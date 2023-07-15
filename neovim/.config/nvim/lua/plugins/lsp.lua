@@ -12,7 +12,7 @@ return {
       local nls = require("null-ls")
       vim.list_extend(opts.sources, {
         nls.builtins.diagnostics.cppcheck.with({
-          args = { "--enable=all", "--suppress=missingIncludeSystem", "$FILENAME" },
+          method = nls.methods.DIAGNOSTICS_ON_SAVE,
         }),
       })
     end,
