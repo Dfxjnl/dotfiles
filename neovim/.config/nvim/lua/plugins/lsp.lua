@@ -6,4 +6,15 @@ return {
       diagnostics = { virtual_text = { prefix = "icons" } },
     },
   },
+  {
+    "jose-elias-alvarez/null-ls.nvim",
+    opts = function(_, opts)
+      local nls = require("null-ls")
+      vim.list_extend(opts.sources, {
+        nls.builtins.diagnostics.cppcheck.with({
+          args = { "--enable=all", "--suppress=missingIncludeSystem", "$FILENAME" },
+        }),
+      })
+    end,
+  },
 }
