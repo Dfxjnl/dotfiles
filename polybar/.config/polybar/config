@@ -242,7 +242,7 @@ bar-used-empty-foreground = ${colors.fg-alt}
 
 [module/network]
 type = internal/network
-interface = enp4s0
+interface = enp5s0
 interval = 3.0
 
 format-connected = <label-connected>
@@ -265,7 +265,7 @@ ramp-signal-4-foreground = ${colors.fg}
 
 [module/network-up]
 type = internal/network
-interface = enp4s0
+interface = enp5s0
 interval = 4.0
 label-connected = "%upspeed%"
 format-connected-prefix = " "
@@ -279,7 +279,7 @@ format-disconnected-foreground = ${colors.alert}
 
 [module/network-down]
 type = internal/network
-interface = enp4s0
+interface = enp5s0
 interval = 4.0
 label-connected = "%downspeed%"
 format-connected-prefix = " "

@@ -30,8 +30,8 @@ alias reboot='sudo reboot'
 alias p='xclip -selection clipboard -out'
 alias y='xclip -selection clipboard -in'
 
-if (( $+commands[exa] )); then
-    alias ls="exa --group-directories-first --git"
+if (( $+commands[eza] )); then
+    alias ls="eza --group-directories-first --git"
     alias l="ls -blF"
     alias ll="ls -abghilmu"
     alias llm='ll --sort=modified'
