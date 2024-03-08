@@ -13,9 +13,6 @@
 [submodule "tmux/.local/share/tmuxifier"]
 	path = tmux/.local/share/tmuxifier
 	url = https://github.com/jimeh/tmuxifier
-[submodule "kitty/.config/kitty/dracula"]
-	path = kitty/.config/kitty/dracula
-	url = https://github.com/dracula/kitty
 [submodule "rofi/.config/rofi/dracula"]
 	path = rofi/.config/rofi/dracula
 	url = https://github.com/dracula/rofi
