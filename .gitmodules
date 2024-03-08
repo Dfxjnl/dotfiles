@@ -1,21 +1,3 @@
-[submodule "tmux/.local/share/tmux-plugins/copycat"]
-	path = tmux/.local/share/tmux-plugins/copycat
-	url = https://github.com/tmux-plugins/tmux-copycat
-[submodule "tmux/.local/share/tmux-plugins/prefix-highlight"]
-	path = tmux/.local/share/tmux-plugins/prefix-highlight
-	url = https://github.com/tmux-plugins/tmux-prefix-highlight
-[submodule "tmux/.local/share/tmux-plugins/yank"]
-	path = tmux/.local/share/tmux-plugins/yank
-	url = https://github.com/tmux-plugins/tmux-yank
-[submodule "tmux/.local/share/tmux-plugins/resurrect"]
-	path = tmux/.local/share/tmux-plugins/resurrect
-	url = https://github.com/tmux-plugins/tmux-resurrect
-[submodule "tmux/.local/share/tmuxifier"]
-	path = tmux/.local/share/tmuxifier
-	url = https://github.com/jimeh/tmuxifier
-[submodule "rofi/.config/rofi/dracula"]
-	path = rofi/.config/rofi/dracula
-	url = https://github.com/dracula/rofi
 [submodule "bat/.config/bat/themes/bat"]
 	path = bat/.config/bat/themes/bat
 	url = https://github.com/catppuccin/bat
