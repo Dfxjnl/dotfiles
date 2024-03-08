@@ -19,3 +19,6 @@
 [submodule "rofi/.config/rofi/dracula"]
 	path = rofi/.config/rofi/dracula
 	url = https://github.com/dracula/rofi
+[submodule "bat/.config/bat/themes/bat"]
+	path = bat/.config/bat/themes/bat
+	url = https://github.com/catppuccin/bat
