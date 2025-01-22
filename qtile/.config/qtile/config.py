@@ -1,12 +1,36 @@
-import os
-import subprocess
+# Copyright (c) 2010 Aldo Cortesi
+# Copyright (c) 2010, 2014 dequis
+# Copyright (c) 2012 Randall Ma
+# Copyright (c) 2012-2014 Tycho Andersen
+# Copyright (c) 2012 Craig Barnes
+# Copyright (c) 2013 horsik
+# Copyright (c) 2013 Tao Sauvage
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
 
-from libqtile import bar, hook, layout, widget
+from libqtile import bar, layout, qtile, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
+from libqtile.utils import guess_terminal
 
 mod = "mod4"
-terminal = "wezterm"
+terminal = guess_terminal()
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -70,19 +94,33 @@ keys = [
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
 ]
 
+# Add key bindings to switch VTs in Wayland.
+# We can't check qtile.core.name in default config as it is loaded before qtile is started
+# We therefore defer the check until the key binding is run by using .when(func=...)
+for vt in range(1, 8):
+    keys.append(
+        Key(
+            ["control", "mod1"],
+            f"f{vt}",
+            lazy.core.change_vt(vt).when(func=lambda: qtile.core.name == "wayland"),
+            desc=f"Switch to VT{vt}",
+        )
+    )
+
+
 groups = [Group(i) for i in "123456789"]
 
 for i in groups:
     keys.extend(
         [
-            # mod1 + letter of group = switch to group
+            # mod + group number = switch to group
             Key(
                 [mod],
                 i.name,
                 lazy.group[i.name].toscreen(),
                 desc="Switch to group {}".format(i.name),
             ),
-            # mod1 + shift + letter of group = switch to & move focused window to group
+            # mod + shift + group number = switch to & move focused window to group
             Key(
                 [mod, "shift"],
                 i.name,
@@ -90,24 +128,22 @@ for i in groups:
                 desc="Switch to & move focused window to group {}".format(i.name),
             ),
             # Or, use below if you prefer not to switch to that group.
-            # # mod1 + shift + letter of group = move focused window to group
+            # # mod + shift + group number = move focused window to group
             # Key([mod, "shift"], i.name, lazy.window.togroup(i.name),
             #     desc="move focused window to group {}".format(i.name)),
         ]
     )
 
-layout_theme = {"border_width": 1, "border_focus": "#B3BEFE"}
-
 layouts = [
-    layout.MonadTall(**layout_theme),
-    layout.MonadWide(**layout_theme),
-    layout.Max(**layout_theme),
+    layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
+    layout.Max(),
     # Try more layouts by unleashing below layouts.
-    # layout.Bsp(),
-    # layout.Columns(),
-    # layout.Matrix(),
-    # layout.RatioTile(),
     # layout.Stack(num_stacks=2),
+    # layout.Bsp(),
+    # layout.Matrix(),
+    # layout.MonadTall(),
+    # layout.MonadWide(),
+    # layout.RatioTile(),
     # layout.Tile(),
     # layout.TreeTab(),
     # layout.VerticalTile(),
@@ -135,13 +171,15 @@ screens = [
                     },
                     name_transform=lambda name: name.upper(),
                 ),
+                widget.TextBox("default config", name="default"),
+                widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
                 # widget.StatusNotifier(),
                 widget.Systray(),
-                widget.Clock(format="%H:%M | %d-%m-%Y"),
+                widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
+                widget.QuickExit(),
             ],
             24,
-            background="#1E1E2E",
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
         ),
@@ -195,6 +233,10 @@ auto_minimize = True
 # When using the Wayland backend, this can be used to configure input devices.
 wl_input_rules = None
 
+# xcursor theme (string or None) and size (integer) for Wayland backend
+wl_xcursor_theme = None
+wl_xcursor_size = 24
+
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the
 # mailing lists, GitHub issues, and other WM documentation that suggest setting
@@ -204,10 +246,3 @@ wl_input_rules = None
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.
 wmname = "LG3D"
-
-
-@hook.subscribe.startup_once
-def autostart():
-    autostartscript = "~/.config/qtile/autostart.sh"
-    home = os.path.expanduser(autostartscript)
-    subprocess.Popen([home])
