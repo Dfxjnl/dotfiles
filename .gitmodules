@@ -4,3 +4,6 @@
 [submodule "hyprland/catppuccin"]
 	path = hyprland/catppuccin
 	url = https://github.com/catppuccin/hyprland
+[submodule "mako/catppuccin"]
+	path = mako/catppuccin
+	url = https://github.com/catppuccin/mako
