@@ -1,0 +1,118 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 35,
+    "margin-bottom": 0,
+    "modules-left": [
+        "clock",
+        "tray"
+    ],
+    "modules-center": [
+        "hyprland/workspaces"
+    ],
+    "modules-right": [
+        "custom/spacer",
+        "cpu",
+        "custom/gpu-nvidia",
+        "memory",
+        "network",
+        "pulseaudio",
+        "idle_inhibitor"
+    ],
+    "clock": {
+        "format": "{:%H:%M - %a %d/%b}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode": "year",
+            "mode-mon-col": 3,
+            "weeks-pos": "right",
+            "on-scroll": 0,
+            "format": {
+                "months": "<span color='#f5e0dc'><b>{}</b></span>",
+                "days": "<span color='#f5c2e7'><b>{}</b></span>",
+                "weeks": "<span color ='#94e2d5'><b>W{}</b></span>",
+                "weekdays": "<span color='#f9e2af'><b>{}</b></span>",
+                "today": "<span color ='#f38ba8'><b><u>{}</u></b></span>"
+            }
+        },
+        "actions": {
+            "on-click-right": "mode"
+        }
+    },
+    "tray": {
+        "icon-size": 16,
+        "spacing": 4,
+        "show-passive-items": true
+    },
+    "hyprland/workspaces": {
+        "active-only": false,
+        "all-outputs": false,
+        "disable-scroll": true,
+        "on-click": "activate",
+        "show-special": false,
+        "format": "{icon}",
+        "format-icons": {
+            "active": "",
+            "default": "",
+            "empty": "",
+            "urgent": "",
+            "special": ""
+        },
+        "persistent-workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": [],
+            "6": []
+        }
+    },
+    "custom/spacer": {
+        "format": " "
+    },
+    "cpu": {
+        "format": "<span weight='bold'></span> {usage}%"
+    },
+    "custom/gpu-nvidia": {
+        "exec": "nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits",
+        "format": " {}%",
+        "return-type": "",
+        "interval": 4
+    },
+    "memory": {
+        "format": "<span weight='bold'></span> {}%"
+    },
+    "network": {
+        "format-disconnected": "<span weight='bold'>⚠</span>",
+        "format-ethernet": "<span weight='bold'></span>",
+        "format-linked": "",
+        "format-wifi": "<span weight='bold'></span> {signalStrength}%",
+        "tooltip-format-ethernet": " {ifname} via {gwaddr}",
+        "tooltip-format-wifi": " {essid}: {ifname} via {gwaddr}"
+    },
+    "pulseaudio": {
+        "format": "<span weight='bold'>{icon}</span>",
+        "format-bluetooth": "<span weight='bold'>{icon}</span> {volume}%",
+        "format-muted": "<span weight='bold'></span>",
+        "format-icons": {
+            "headphones": "",
+            "handsfree": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": [
+                "",
+                ""
+            ]
+        },
+        "on-click": "pavucontrol"
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    }
+}

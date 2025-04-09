@@ -7,3 +7,6 @@
 [submodule "mako/catppuccin"]
 	path = mako/catppuccin
 	url = https://github.com/catppuccin/mako
+[submodule "waybar/catppuccin"]
+	path = waybar/catppuccin
+	url = https://github.com/catppuccin/waybar
