@@ -1,0 +1,183 @@
+@import "catppuccin-mocha"
+
+* {
+    font: "JetBrains Mono 12";
+    background-color: transparent;
+    text-color: inherit;
+}
+
+error-message {
+    font: "Fira Sans 14";
+    paddng: 32px;
+}
+
+entry, prompt {
+    font: "JetBrains Mono 16";
+}
+
+configuration {
+    show-icons: true;
+
+    run, drun, window {
+        fallback-icon: "view-fullscreen-symbolic";
+    }
+
+    matching: "regex";
+
+    drun-display-format: "{name} [<span weight='light' size='small' alpha='40%'>({generic})</span>]";
+
+    drun {
+        parse-user: true;
+        parse-system: true;
+    }
+}
+
+window {
+    anchor: north;
+    background-color: transparent;
+    enable: true;
+    height: 800px;
+    location: north;
+    transparency: "real";
+    width: 760px;
+    x-offset: 0;
+    y-offset: 10%;
+}
+
+window, mainbox {
+    border-radius: 0;
+    border: 0;
+    margin: 0;
+    outline: 0;
+    padding: 0;
+    spacing: 0;
+}
+
+mainbox {
+    enabled: true;
+    children: [
+        inputbar,
+        listview,
+        message,
+        overlay
+    ];
+}
+
+textbox {
+    font: inherit;
+}
+
+inputbar {
+    children: [
+        entry,
+        icon,
+        num-filtered-rows,
+        prompt
+    ];
+}
+
+icon, icon-current-entry, prompt, num-filtered-rows {
+    expand: false;
+}
+
+icon {
+    filename: "search-symbolic";
+}
+
+entry {
+    blink: true;
+    cursor: text;
+    placeholder-markup: true;
+    placeholder: "Search...";
+}
+
+inputbar {
+    background-color: @base;
+}
+
+listview {
+    expand: false;
+    fixed-height: false;
+}
+
+listview, inputbar, overlay, message, error-message {
+    border-color: @lavender;
+    border-radius: 1px;
+    border: 0 0 2px 0;
+    margin: 0 0 8px 0;
+}
+
+element, overlay, error-message {
+    background-color: @base;
+}
+
+element selected {
+    background-color: @overlay2;
+}
+
+message {
+    background-color: @base;
+    margin: -9px 0 8px 0;
+    padding: 16px 24px;
+}
+
+textbox, prompt, entry, element-text {
+    text-color: @text;
+}
+
+element-icon {
+    size: 24px;
+}
+
+icon, icon-current-entry {
+    size: 32px;
+}
+
+inputbar {
+    padding: 20px;
+    spacing: 12px;
+}
+
+prompt, entry, num-filtered-rows, element-text {
+    vertical-align: 0.65;
+}
+
+textbox-current-entry, prompt, num-filtered-rows {
+    text-color: @text;
+}
+
+num-filtered-rows {
+    text-color: @subtext0;
+}
+
+prompt {
+    enabled: true;
+    text-transform: bold;
+}
+
+entry {
+    blink: true;
+    cursor: @text;
+    placeholder-color: @subtext0;
+    placeholder-markup: true;
+    placeholder: "Search...";
+}
+
+listview {
+    spacing: 0;
+}
+
+overlay {
+    text-color: @subtext0;
+    text-transform: italic;
+}
+
+element {
+    padding: 0.5em 0em 0.5em 2.5ch;
+    spacing: 18px;
+}
+
+element-text {
+    highlight: underline bold;
+    horizontal-align: 0.0;
+}

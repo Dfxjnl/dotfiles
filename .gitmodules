@@ -10,3 +10,6 @@
 [submodule "waybar/catppuccin"]
 	path = waybar/catppuccin
 	url = https://github.com/catppuccin/waybar
+[submodule "rofi/catppuccin"]
+	path = rofi/catppuccin
+	url = https://github.com/catppuccin/rofi
