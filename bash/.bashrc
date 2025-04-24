@@ -1,12 +1,12 @@
 if [[ $- != *i* ]]; then
-  # Shell is non-interactive.
-  return
+    # Shell is non-interactive.
+    return
 fi
 
 # XDG Base Directories
 if test -z "${XDG_RUNTIME_DIR}"; then
-  XDG_RUNTIME_DIR=$(mktemp -d "${UID}-runtime-dir.XXX")
-  export XDG_RUNTIME_DIR
+    XDG_RUNTIME_DIR=$(mktemp -d "${UID}-runtime-dir.XXX")
+    export XDG_RUNTIME_DIR
 fi
 
 export XDG_DATA_HOME="${HOME}/.local/share"
@@ -82,5 +82,7 @@ shopt -s cdspell 2>/dev/null
 # If set, bash attempts spelling correction on directory names during word completion if the
 # directory name initially supplied does not exist.
 shopt -s dirspell 2>/dev/null
+
+alias la="ls -a"
 
 eval "$(starship init bash)"
