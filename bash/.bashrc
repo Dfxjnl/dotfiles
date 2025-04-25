@@ -14,8 +14,6 @@ export XDG_CONFIG_HOME="${HOME}/.config"
 export XDG_STATE_HOME="${HOME}/.local/state"
 export XDG_CACHE_HOME="${HOME}/.cache"
 
-export HISTFILE="${XDG_STATE_HOME}/bash/history"
-
 export CARGO_HOME="${XDG_DATA_HOME}/cargo"
 
 export NPM_CONFIG_INIT_MODULE="${XDG_CONFIG_HOME}/npm/config/npm-init.js"
@@ -23,6 +21,30 @@ export NPM_CONFIG_CACHE="${XDG_CACHE_HOME}/npm"
 export NPM_CONFIG_TMP="${XDG_RUNTIME_DIR}/npm"
 
 export EDITOR=nvim
+
+# History configuration.
+export HISTFILE="${XDG_STATE_HOME}/bash/history"
+
+# ignoreboth = ignoredups + ignorespace:
+#     - ignoredups: ignore consecutive duplicate commands.
+#     - ignorespace: ignore commands with leading whitespace.
+# erasedups: eliminate all previous duplicates.
+HISTCONTROL="ignoreboth:erasedups"
+
+# Larger history size.
+HISTSIZE=524288     # 2 ^ 19
+HISTFILESIZE=131072 # 2 ^ 17
+
+# Use standard ISO 8601 timestamp.
+# %F equivalent to %Y-%m-%d
+# %T equivalent to %H:%M:%S
+HISTTIMEFORMAT="%F %T "
+
+# Enable incremental history search with up/down arrows.
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
+bind '"\e[C": forward-char'
+bind '"\e[D": backward-char'
 
 # Smarter tab-completion (readline bindings)
 
@@ -42,30 +64,10 @@ bind "set mark-symlinked-directories on"
 # bell.
 bind "set show-all-if-ambiguous on"
 
-# History defaults.
-
 # If this variable is set, and is an array, the value of each set element is executed as a command
 # prior to issuing each primary prompt. If this is set but not an array variable, its value is used
 # as a command to execute instead.
 PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND ;} history -a"
-
-# Huge history.
-HISTSIZE=500000
-HISTFILESIZE=100000
-
-# Avoid duplicated entries.
-HISTCONTROL="ignoreboth:erasedups"
-
-# Use standard ISO 8601 timestamp.
-# %F equivalent to %Y-%m-%d
-# %T equivalent to %H:%M:%S
-HISTTIMEFORMAT='%F %T '
-
-# Enable incremental history search with up/down arrows.
-bind '"\e[A": history-search-backward'
-bind '"\e[B": history-search-forward'
-bind '"\e[C": forward-char'
-bind '"\e[D": backward-char'
 
 # Better directory navigation.
 
@@ -83,6 +85,6 @@ shopt -s cdspell 2>/dev/null
 # directory name initially supplied does not exist.
 shopt -s dirspell 2>/dev/null
 
-alias la="ls -a"
+source "$XDG_CONFIG_HOME"/bash/aliases.sh
 
 eval "$(starship init bash)"
