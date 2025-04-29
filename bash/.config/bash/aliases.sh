@@ -15,6 +15,7 @@ alias mkdir='mkdir -pv'
 alias sudo='sudo '
 
 # Directory browsing.
+alias la='ls -A'
 alias ll='ls -hlA'
 
 # Prints each $PATH entry on a separate line.
