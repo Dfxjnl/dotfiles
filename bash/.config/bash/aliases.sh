@@ -20,3 +20,5 @@ alias ll='ls -hlA'
 
 # Prints each $PATH entry on a separate line.
 alias path='echo -e ${PATH//:/\\n}'
+
+alias wget='wget --hsts-file=$XDG_DATA_HOME/wget-hsts'
