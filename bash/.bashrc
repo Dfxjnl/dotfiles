@@ -20,6 +20,12 @@ export NPM_CONFIG_INIT_MODULE="${XDG_CONFIG_HOME}/npm/config/npm-init.js"
 export NPM_CONFIG_CACHE="${XDG_CACHE_HOME}/npm"
 export NPM_CONFIG_TMP="${XDG_RUNTIME_DIR}/npm"
 
+export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
+
+export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
+
+export PASSWORD_STORE_DIR="${XDG_DATA_HOME}/pass"
+
 export VCPKG_ROOT="${HOME}/repos/vcpkg"
 export PATH=$VCPKG_ROOT:$PATH
 
