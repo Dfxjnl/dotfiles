@@ -15,10 +15,10 @@ alias mkdir='mkdir -pv'
 alias sudo='sudo '
 
 # Directory browsing.
-alias la='ls -A'
-alias ll='ls -hlA'
+alias la='ls -Ah'
+alias ll='ls -Ahl'
 
 # Prints each $PATH entry on a separate line.
 alias path='echo -e ${PATH//:/\\n}'
 
-alias wget='wget --hsts-file=$XDG_DATA_HOME/wget-hsts'
+alias wget='wget -c --hsts-file=$XDG_DATA_HOME/wget-hsts'
