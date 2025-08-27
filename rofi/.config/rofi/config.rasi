@@ -1,38 +1,60 @@
 @import "catppuccin-mocha"
 
 configuration {
-    font-mono: "JetBrainsMono 12";
-    font-sans: "Fira Sans 14";
+    drun-display-format: "{name} [<span weight='light' size='small' alpha='40%'>({generic})</span>]";
+    matching: "regex";
+    show-icons: true;
+
+    run,drun,window {
+        fallback-icon: "view-fullscreen-symbolic";
+    }
+
+    drun {
+        parse-system: true;
+        parse-user: true;
+    }
 }
 
 * {
-    font: @font-mono;
-    selected-active-foreground: @background;
-    lightfg: @text;
-    separatorcolor: @foreground;
-    urgent-foreground: @red;
-    alternate-urgent-background: @lightbg;
-    lightbg: @mantle;
-    background-color: transparent;
-    border-color: @foreground;
-    normal-background: @background;
-    selected-urgent-background: @red;
-    alternate-active-background: @lightbg;
-    spacing: 2;
-    alternate-normal-foreground: @foreground;
-    urgent-background: @background;
-    selected-normal-foreground: @lightbg;
-    active-foreground: @blue;
-    background: @base;
-    selected-active-background: @blue;
+    font-mono-0: "JetBrainsMono 12";
+    font-mono-1: "JetBrainsMono 14";
+    font-sans: "Fira Sans 14";
+
     active-background: @background;
-    selected-normal-background: @lightfg;
-    alternate-normal-background: @lightbg;
-    foreground: @text;
-    selected-urgent-foreground: @background;
-    normal-foreground: @foreground;
-    alternate-urgent-foreground: @red;
+    active-foreground: @blue;
+    alternate-active-background: @lightbg;
     alternate-active-foreground: @blue;
+    alternate-normal-background: @lightbg;
+    alternate-normal-foreground: @foreground;
+    alternate-urgent-background: @lightbg;
+    alternate-urgent-foreground: @red;
+    background-color: transparent;
+    background: @base;
+    border-color: @foreground;
+    font: @font-mono-0;
+    foreground: @text;
+    lightbg: @mantle;
+    lightfg: @text;
+    normal-background: @background;
+    normal-foreground: @foreground;
+    selected-active-background: @blue;
+    selected-active-foreground: @background;
+    selected-normal-background: @lightfg;
+    selected-normal-foreground: @lightbg;
+    selected-urgent-background: @red;
+    selected-urgent-foreground: @background;
+    separatorcolor: @foreground;
+    spacing: 2;
+    urgent-background: @background;
+    urgent-foreground: @red;
+}
+
+error-message {
+    font: @font-sans;
+}
+
+entry, prompt {
+    font: @font-mono-1;
 }
 
 element {
@@ -96,15 +118,17 @@ element-text {
 
 element-icon {
     background-color: transparent;
-    size: 1em;
     cursor: inherit;
+    size: 24px;
     text-color: inherit;
 }
 
 window {
-    padding: 5;
     background-color: @background;
     border: 1;
+    height: 800px;
+    padding: 5;
+    width: 760px;
 }
 
 mainbox {
@@ -123,12 +147,13 @@ textbox {
 }
 
 listview {
+    border-color: @separatorcolor;
+    border: 2px dash 0px 0px;
+    expand: false;
+    fixed-height: false;
     padding: 2px 0px 0px;
     scrollbar: true;
-    border-color: @separatorcolor;
     spacing: 2px;
-    fixed-height: 0;
-    border: 2px dash 0px 0px;
 }
 
 scrollbar {
@@ -149,6 +174,7 @@ button {
     spacing: 0;
     text-color: @normal-foreground;
 }
+
 button selected {
     background-color: @selected-normal-background;
     text-color: @selected-normal-foreground;
@@ -171,11 +197,11 @@ textbox-num-sep {
 }
 
 inputbar {
+    children: [ "prompt", "textbox-prompt-colon", "entry", "num-filtered-rows", "textbox-num-sep",
+        "num-rows", "case-indicator"];
     padding: 1px;
     spacing: 0px;
     text-color: @normal-foreground;
-    children: [ "prompt", "textbox-prompt-colon", "entry", "num-filtered-rows",
-        "textbox-num-sep", "num-rows", "case-indicator"];
 }
 
 case-indicator {
@@ -184,11 +210,13 @@ case-indicator {
 }
 
 entry {
-    text-color: @normal-foreground;
+    blink: true;
     cursor: text;
-    spacing: 0;
     placeholder-color: Gray;
-    placeholder: "Type to filter";
+    placeholder-markup: true;
+    placeholder: "Search...";
+    spacing: 0;
+    text-color: @normal-foreground;
 }
 
 prompt {
