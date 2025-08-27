@@ -1,183 +1,232 @@
 @import "catppuccin-mocha"
 
-* {
-    font: "JetBrains Mono 12";
-    background-color: transparent;
-    text-color: inherit;
-}
-
-error-message {
-    font: "Fira Sans 14";
-    paddng: 32px;
-}
-
-entry, prompt {
-    font: "JetBrains Mono 16";
-}
-
 configuration {
+    drun-display-format: "{name} [<span weight='light' size='small' alpha='40%'>({generic})</span>]";
+    matching: "regex";
     show-icons: true;
 
-    run, drun, window {
+    run,drun,window {
         fallback-icon: "view-fullscreen-symbolic";
     }
 
-    matching: "regex";
-
-    drun-display-format: "{name} [<span weight='light' size='small' alpha='40%'>({generic})</span>]";
-
     drun {
-        parse-user: true;
         parse-system: true;
+        parse-user: true;
     }
 }
 
-window {
-    anchor: north;
+* {
+    font-mono-0: "JetBrainsMono 12";
+    font-mono-1: "JetBrainsMono 14";
+    font-sans: "Fira Sans 14";
+
+    active-background: @background;
+    active-foreground: @blue;
+    alternate-active-background: @lightbg;
+    alternate-active-foreground: @blue;
+    alternate-normal-background: @lightbg;
+    alternate-normal-foreground: @foreground;
+    alternate-urgent-background: @lightbg;
+    alternate-urgent-foreground: @red;
     background-color: transparent;
-    enable: true;
-    height: 800px;
-    location: north;
-    transparency: "real";
-    width: 760px;
-    x-offset: 0;
-    y-offset: 10%;
+    background: @base;
+    border-color: @foreground;
+    font: @font-mono-0;
+    foreground: @text;
+    lightbg: @mantle;
+    lightfg: @text;
+    normal-background: @background;
+    normal-foreground: @foreground;
+    selected-active-background: @blue;
+    selected-active-foreground: @background;
+    selected-normal-background: @lightfg;
+    selected-normal-foreground: @lightbg;
+    selected-urgent-background: @red;
+    selected-urgent-foreground: @background;
+    separatorcolor: @foreground;
+    spacing: 2;
+    urgent-background: @background;
+    urgent-foreground: @red;
 }
 
-window, mainbox {
-    border-radius: 0;
+error-message {
+    font: @font-sans;
+}
+
+entry, prompt {
+    font: @font-mono-1;
+}
+
+element {
+    padding: 1px;
+    cursor: pointer;
+    spacing: 5px;
     border: 0;
-    margin: 0;
-    outline: 0;
-    padding: 0;
-    spacing: 0;
+}
+
+element normal.normal {
+    background-color: @normal-background;
+    text-color: @normal-foreground;
+}
+
+element normal.urgent {
+    background-color: @urgent-background;
+    text-color: @urgent-foreground;
+}
+
+element normal.active {
+    background-color: @active-background;
+    text-color: @active-foreground;
+}
+
+element selected.normal {
+    background-color: @selected-normal-background;
+    text-color: @selected-normal-foreground;
+}
+
+element selected.urgent {
+    background-color: @selected-urgent-background;
+    text-color: @selected-urgent-foreground;
+}
+
+element selected.active {
+    background-color: @selected-active-background;
+    text-color: @selected-active-foreground;
+}
+
+element alternate.normal {
+    background-color: @alternate-normal-background;
+    text-color: @alternate-normal-foreground;
+}
+
+element alternate.urgent {
+    background-color: @alternate-urgent-background;
+    text-color: @alternate-urgent-foreground;
+}
+
+element alternate.active {
+    background-color: @alternate-active-background;
+    text-color: @alternate-active-foreground;
+}
+
+element-text {
+    background-color: transparent;
+    cursor: inherit;
+    highlight: inherit;
+    text-color: inherit;
+}
+
+element-icon {
+    background-color: transparent;
+    cursor: inherit;
+    size: 24px;
+    text-color: inherit;
+}
+
+window {
+    background-color: @background;
+    border: 1;
+    height: 800px;
+    padding: 5;
+    width: 760px;
 }
 
 mainbox {
-    enabled: true;
-    children: [
-        inputbar,
-        listview,
-        message,
-        overlay
-    ];
+    padding: 0;
+    border: 0;
+}
+
+message {
+    padding: 1px;
+    border-color: @separatorcolor;
+    border: 2px dash 0px 0px;
 }
 
 textbox {
-    font: inherit;
+    text-color: @foreground;
+}
+
+listview {
+    border-color: @separatorcolor;
+    border: 2px dash 0px 0px;
+    expand: false;
+    fixed-height: false;
+    padding: 2px 0px 0px;
+    scrollbar: true;
+    spacing: 2px;
+}
+
+scrollbar {
+    width: 4px;
+    padding: 0;
+    handle-width: 8px;
+    border: 0;
+    handle-color: @normal-foreground;
+}
+
+sidebar {
+    border-color: @separatorcolor;
+    border: 2px dash 0px 0px;
+}
+
+button {
+    cursor: pointer;
+    spacing: 0;
+    text-color: @normal-foreground;
+}
+
+button selected {
+    background-color: @selected-normal-background;
+    text-color: @selected-normal-foreground;
+}
+
+num-filtered-rows {
+    expand: false;
+    text-color: Gray;
+}
+
+num-rows {
+    expand: false;
+    text-color: Gray;
+}
+
+textbox-num-sep {
+    expand: false;
+    str: "/";
+    text-color: Gray;
 }
 
 inputbar {
-    children: [
-        entry,
-        icon,
-        num-filtered-rows,
-        prompt
-    ];
+    children: [ "prompt", "textbox-prompt-colon", "entry", "num-filtered-rows", "textbox-num-sep",
+        "num-rows", "case-indicator"];
+    padding: 1px;
+    spacing: 0px;
+    text-color: @normal-foreground;
 }
 
-icon, icon-current-entry, prompt, num-filtered-rows {
-    expand: false;
-}
-
-icon {
-    filename: "search-symbolic";
+case-indicator {
+    spacing: 0;
+    text-color: @normal-foreground;
 }
 
 entry {
     blink: true;
     cursor: text;
+    placeholder-color: Gray;
     placeholder-markup: true;
     placeholder: "Search...";
-}
-
-inputbar {
-    background-color: @base;
-}
-
-listview {
-    expand: false;
-    fixed-height: false;
-}
-
-listview, inputbar, overlay, message, error-message {
-    border-color: @lavender;
-    border-radius: 1px;
-    border: 0 0 2px 0;
-    margin: 0 0 8px 0;
-}
-
-element, overlay, error-message {
-    background-color: @base;
-}
-
-element selected {
-    background-color: @overlay2;
-}
-
-message {
-    background-color: @base;
-    margin: -9px 0 8px 0;
-    padding: 16px 24px;
-}
-
-textbox, prompt, entry, element-text {
-    text-color: @text;
-}
-
-element-icon {
-    size: 24px;
-}
-
-icon, icon-current-entry {
-    size: 32px;
-}
-
-inputbar {
-    padding: 20px;
-    spacing: 12px;
-}
-
-prompt, entry, num-filtered-rows, element-text {
-    vertical-align: 0.65;
-}
-
-textbox-current-entry, prompt, num-filtered-rows {
-    text-color: @text;
-}
-
-num-filtered-rows {
-    text-color: @subtext0;
+    spacing: 0;
+    text-color: @normal-foreground;
 }
 
 prompt {
-    enabled: true;
-    text-transform: bold;
-}
-
-entry {
-    blink: true;
-    cursor: @text;
-    placeholder-color: @subtext0;
-    placeholder-markup: true;
-    placeholder: "Search...";
-}
-
-listview {
     spacing: 0;
+    text-color: @normal-foreground;
 }
 
-overlay {
-    text-color: @subtext0;
-    text-transform: italic;
-}
-
-element {
-    padding: 0.5em 0em 0.5em 2.5ch;
-    spacing: 18px;
-}
-
-element-text {
-    highlight: underline bold;
-    horizontal-align: 0.0;
+textbox-prompt-colon {
+    margin: 0px 0.3em 0em 0em;
+    expand: false;
+    str: ":";
+    text-color: inherit;
 }
