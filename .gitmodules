@@ -13,3 +13,6 @@
 [submodule "rofi/catppuccin"]
 	path = rofi/catppuccin
 	url = https://github.com/catppuccin/rofi
+[submodule "btop/catppuccin"]
+	path = btop/catppuccin
+	url = https://github.com/catppuccin/btop
