@@ -4,131 +4,32 @@ configuration {
     drun-display-format: "{name} [<span weight='light' size='small' alpha='40%'>({generic})</span>]";
     matching: "regex";
     show-icons: true;
-
-    run,drun,window {
-        fallback-icon: "view-fullscreen-symbolic";
-    }
-
-    drun {
-        parse-system: true;
-        parse-user: true;
-    }
 }
 
 * {
-    font-mono-0: "JetBrainsMono 12";
-    font-mono-1: "JetBrainsMono 14";
+    font: "JetBrainsMono 12";
+    font-prompt: "JetBrainsMono 14";
     font-sans: "Fira Sans 14";
 
-    active-background: @background;
-    active-foreground: @blue;
-    alternate-active-background: @lightbg;
-    alternate-active-foreground: @blue;
-    alternate-normal-background: @lightbg;
-    alternate-normal-foreground: @foreground;
-    alternate-urgent-background: @lightbg;
-    alternate-urgent-foreground: @red;
-    background-color: transparent;
     background: @base;
-    border-color: @foreground;
-    font: @font-mono-0;
     foreground: @text;
-    lightbg: @mantle;
-    lightfg: @text;
-    normal-background: @background;
-    normal-foreground: @foreground;
-    selected-active-background: @blue;
-    selected-active-foreground: @background;
-    selected-normal-background: @lightfg;
-    selected-normal-foreground: @lightbg;
-    selected-urgent-background: @red;
-    selected-urgent-foreground: @background;
-    separatorcolor: @foreground;
-    spacing: 2;
-    urgent-background: @background;
-    urgent-foreground: @red;
-}
 
-error-message {
-    font: @font-sans;
-}
-
-entry, prompt {
-    font: @font-mono-1;
-}
-
-element {
-    padding: 1px;
-    cursor: pointer;
-    spacing: 5px;
-    border: 0;
-}
-
-element normal.normal {
-    background-color: @normal-background;
-    text-color: @normal-foreground;
-}
-
-element normal.urgent {
-    background-color: @urgent-background;
-    text-color: @urgent-foreground;
-}
-
-element normal.active {
-    background-color: @active-background;
-    text-color: @active-foreground;
-}
-
-element selected.normal {
-    background-color: @selected-normal-background;
-    text-color: @selected-normal-foreground;
-}
-
-element selected.urgent {
-    background-color: @selected-urgent-background;
-    text-color: @selected-urgent-foreground;
-}
-
-element selected.active {
-    background-color: @selected-active-background;
-    text-color: @selected-active-foreground;
-}
-
-element alternate.normal {
-    background-color: @alternate-normal-background;
-    text-color: @alternate-normal-foreground;
-}
-
-element alternate.urgent {
-    background-color: @alternate-urgent-background;
-    text-color: @alternate-urgent-foreground;
-}
-
-element alternate.active {
-    background-color: @alternate-active-background;
-    text-color: @alternate-active-foreground;
-}
-
-element-text {
-    background-color: transparent;
-    cursor: inherit;
-    highlight: inherit;
-    text-color: inherit;
-}
-
-element-icon {
-    background-color: transparent;
-    cursor: inherit;
-    size: 24px;
-    text-color: inherit;
+    selected-bg: @blue;
+    selected-fg: @base;
+    urgent-bg: @red;
+    urgent-fg: @base;
+    active-bg: @green;
+    active-fg: @base;
 }
 
 window {
-    background-color: @background;
-    border: 1;
-    height: 800px;
-    padding: 5;
-    width: 760px;
+    background-color: @base;
+    border-color: @lavender;
+    border-radius: 10px;
+    border: 1px;
+    padding: 10px;
+    width: 35%;
+    y-offset: -100px;
 }
 
 mainbox {
@@ -136,97 +37,102 @@ mainbox {
     border: 0;
 }
 
-message {
-    padding: 1px;
-    border-color: @separatorcolor;
-    border: 2px dash 0px 0px;
+inputbar {
+    background-color: @mantle;
+    border-radius: 8px;
+    border: 0;
+    children: ["prompt", "textbox-prompt-colon", "entry"];
+    margin: 0 0 5px 0;
+    padding: 8px 10px;
+    text-color: @foreground;
 }
 
-textbox {
+prompt {
+    font: @font-prompt;
+    text-color: @blue;
+}
+
+textbox-prompt-colon {
+    expand: false;
+    font: @font-prompt;
+    margin: 0 0.3em 0 0;
+    str: ":";
+    text-color: @blue;
+}
+
+entry {
+    font: @font-prompt;
+    placeholder-color: @subtext0;
+    placeholder: "Search applications or commands...";
     text-color: @foreground;
 }
 
 listview {
-    border-color: @separatorcolor;
-    border: 2px dash 0px 0px;
-    expand: false;
-    fixed-height: false;
-    padding: 2px 0px 0px;
-    scrollbar: true;
-    spacing: 2px;
-}
-
-scrollbar {
-    width: 4px;
-    padding: 0;
-    handle-width: 8px;
+    background-color: transparent;
     border: 0;
-    handle-color: @normal-foreground;
+    cycle: true;
+    dynamic: true;
+    layout: vertical;
+    padding: 0;
+    scrollbar: false;
+    spacing: 3px;
 }
 
-sidebar {
-    border-color: @separatorcolor;
-    border: 2px dash 0px 0px;
+element {
+    background-color: transparent;
+    border-radius: 5px;
+    border: 0;
+    padding: 2px 5px;
+    spacing: 10px;
+    text-color: @foreground;
 }
 
-button {
-    cursor: pointer;
-    spacing: 0;
-    text-color: @normal-foreground;
+element normal {
+    background-color: transparent;
+    text-color: @foreground;
 }
 
-button selected {
-    background-color: @selected-normal-background;
-    text-color: @selected-normal-foreground;
+element urgent {
+    background-color: @urgent-bg;
+    text-color: @urgent-fg;
 }
 
-num-filtered-rows {
-    expand: false;
-    text-color: Gray;
+element active {
+    background-color: @active-bg;
+    text-color: @active-fg;
 }
 
-num-rows {
-    expand: false;
-    text-color: Gray;
-}
-
-textbox-num-sep {
-    expand: false;
-    str: "/";
-    text-color: Gray;
-}
-
-inputbar {
-    children: [ "prompt", "textbox-prompt-colon", "entry", "num-filtered-rows", "textbox-num-sep",
-        "num-rows", "case-indicator"];
-    padding: 1px;
-    spacing: 0px;
-    text-color: @normal-foreground;
-}
-
-case-indicator {
-    spacing: 0;
-    text-color: @normal-foreground;
-}
-
-entry {
-    blink: true;
-    cursor: text;
-    placeholder-color: Gray;
-    placeholder-markup: true;
-    placeholder: "Search...";
-    spacing: 0;
-    text-color: @normal-foreground;
-}
-
-prompt {
-    spacing: 0;
-    text-color: @normal-foreground;
-}
-
-textbox-prompt-colon {
-    margin: 0px 0.3em 0em 0em;
-    expand: false;
-    str: ":";
+element alternate {
+    background-color: transparent;
     text-color: inherit;
+}
+
+element alternate.normal {
+    background-color: transparent;
+    text-color: @foreground;
+}
+
+element alternate.urgent {
+    background-color: @urgent-bg;
+    text-color: @urgent-fg;
+}
+
+element alternate.active {
+    background-color: @active-bg;
+    text-color: @active-fg;
+}
+
+element selected {
+    background-color: @selected-bg;
+    text-color: @selected-fg;
+}
+
+element-icon {
+    size: 20px;
+    text-color: inherit;
+}
+
+element-text {
+    text-color: inherit;
+    background-color: transparent;
 }
