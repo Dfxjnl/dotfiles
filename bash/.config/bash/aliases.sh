@@ -22,3 +22,5 @@ alias ll='ls -Ahl'
 alias path='echo -e ${PATH//:/\\n}'
 
 alias wget='wget -c --hsts-file=$XDG_DATA_HOME/wget-hsts'
+
+alias stow='stow -v'

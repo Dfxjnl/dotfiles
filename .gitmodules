@@ -16,3 +16,6 @@
 [submodule "btop/catppuccin"]
 	path = btop/catppuccin
 	url = https://github.com/catppuccin/btop
+[submodule "lazygit/catppuccin"]
+	path = lazygit/catppuccin
+	url = https://github.com/catppuccin/lazygit
