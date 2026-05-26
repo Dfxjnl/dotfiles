@@ -5,7 +5,12 @@ return {
     picker = {
       sources = {
         explorer = {
-          -- show hidden files like .env
+          hidden = true,
+        },
+        files = {
+          hidden = true,
+        },
+        grep = {
           hidden = true,
         },
       },
@@ -13,8 +18,6 @@ return {
   },
   {
     "max397574/better-escape.nvim",
-    config = function()
-      require("better_escape").setup()
-    end,
+    config = true,
   },
 }
