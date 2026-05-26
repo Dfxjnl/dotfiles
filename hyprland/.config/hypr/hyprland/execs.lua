@@ -1,0 +1,5 @@
+hl.on("hyprland.start", function()
+	hl.exec_cmd("hypridle")
+	hl.exec_cmd("mako")
+	hl.exec_cmd("waybar")
+end)
