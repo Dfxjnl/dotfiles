@@ -32,10 +32,12 @@ path_prepend() {
 # App-specific XDG paths.
 export CARGO_HOME="${XDG_DATA_HOME}/cargo"
 export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
+export GTK2_RC_FILES="${XDG_CONFIG_HOME}/gtk-2.0/gtkrc"
 export NPM_CONFIG_CACHE="${XDG_CACHE_HOME}/npm"
 export NPM_CONFIG_INIT_MODULE="${XDG_CONFIG_HOME}/npm/config/npm-init.js"
 export NPM_CONFIG_TMP="${XDG_RUNTIME_DIR}/npm"
 export PASSWORD_STORE_DIR="${XDG_DATA_HOME}/pass"
+export PYTHON_HISTORY="${XDG_STATE_HOME}/python_history"
 
 export VCPKG_ROOT="${HOME}/repos/vcpkg"
 path_prepend "$VCPKG_ROOT"
